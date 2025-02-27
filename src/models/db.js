@@ -1,12 +1,12 @@
 import { userMemStore } from "./mem/user-mem-store.js";
-import { spotMemStore } from "./mem/spot-mem-store.js";
+import { collectionMemStore } from "./mem/collection-mem-store.js";
 
 export const db = {
   userStore: null,
-  spotStore: null,
+  collectionStore: null,
 
   init() {
     this.userStore = userMemStore;
-    this.spotStore = spotMemStore;
+    this.collectionStore = collectionMemStore;
   },
 };

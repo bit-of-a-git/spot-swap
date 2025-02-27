@@ -3,21 +3,21 @@ import { db } from "../models/db.js";
 export const dashboardController = {
   index: {
     handler: async function (request, h) {
-      const spots = await db.spotStore.getAllSpots();
+      const collections = await db.collectionStore.getAllCollections();
       const viewData = {
         title: "SpotSwap Dashboard",
-        spots: spots,
+        collections: collections,
       };
       return h.view("dashboard-view", viewData);
     },
   },
 
-  addSpot: {
+  addCollection: {
     handler: async function (request, h) {
-      const newSpot = {
+      const newCollection = {
         title: request.payload.title,
       };
-      await db.spotStore.addSpot(newSpot);
+      await db.collectionStore.addCollection(newCollection);
       return h.redirect("/dashboard");
     },
   },
