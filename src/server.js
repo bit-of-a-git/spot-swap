@@ -3,6 +3,7 @@ import Hapi from "@hapi/hapi";
 import path from "path";
 import { fileURLToPath } from "url";
 import Handlebars from "handlebars";
+import Joi from "joi";
 import { webRoutes } from "./web-routes.js";
 import { db } from "./models/db.js";
 import { apiRoutes } from "./api-routes.js";
@@ -16,6 +17,7 @@ async function init() {
   });
 
   await server.register(Vision);
+  server.validator(Joi);
 
   server.views({
     engines: {
