@@ -12,5 +12,5 @@ export const CollectionSpec = {
 };
 
 export const SpotSpec = {
-  title: Joi.string().required(),
+  name: Joi.string().required(),
 };

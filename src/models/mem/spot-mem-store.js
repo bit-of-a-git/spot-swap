@@ -36,6 +36,6 @@ export const spotMemStore = {
   },
 
   async updateSpot(spot, updatedSpot) {
-    spot.title = updatedSpot.title;
+    spot.name = updatedSpot.name;
   },
 };

@@ -39,9 +39,7 @@ export const spotJsonStore = {
   },
 
   async updateSpot(spot, updatedSpot) {
-    spot.title = updatedSpot.title;
-    spot.artist = updatedSpot.artist;
-    spot.duration = updatedSpot.duration;
+    spot.name = updatedSpot.name;
     await db.write();
   },
 };
