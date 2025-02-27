@@ -10,3 +10,7 @@ export const UserSpec = {
 export const CollectionSpec = {
   title: Joi.string().required(),
 };
+
+export const SpotSpec = {
+  title: Joi.string().required(),
+};
