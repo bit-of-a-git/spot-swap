@@ -1,4 +1,5 @@
 import { db } from "../models/db.js";
+import { CollectionSpec } from "../models/joi-schemas.js";
 
 export const dashboardController = {
   index: {
