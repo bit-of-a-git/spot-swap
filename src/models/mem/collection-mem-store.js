@@ -1,4 +1,5 @@
 import { v4 } from "uuid";
+import { spotMemStore } from "./spot-mem-store.js";
 
 let collections = [];
 
@@ -14,7 +15,9 @@ export const collectionMemStore = {
   },
 
   async getCollectionById(id) {
-    return collections.find((collection) => collection._id === id);
+    const list = collections.find((collection) => collection._id === id);
+    list.spots = await spotMemStore.getSpotsByCollectionId(list._id);
+    return list;
   },
 
   async deleteCollectionById(id) {

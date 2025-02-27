@@ -1,5 +1,6 @@
 import { accountsController } from "./controllers/accounts-controller.js";
 import { dashboardController } from "./controllers/dashboard-controller.js";
+import { collectionController } from "./controllers/collection-controller.js";
 
 export const webRoutes = [
   { method: "GET", path: "/", config: accountsController.index },
@@ -11,4 +12,7 @@ export const webRoutes = [
 
   { method: "GET", path: "/dashboard", config: dashboardController.index },
   { method: "POST", path: "/dashboard/addcollection", config: dashboardController.addCollection },
+
+  { method: "GET", path: "/collection/{id}", config: collectionController.index },
+  { method: "POST", path: "/collection/{id}/addspot", config: collectionController.addSpot },
 ];
