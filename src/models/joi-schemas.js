@@ -6,3 +6,7 @@ export const UserSpec = {
   email: Joi.string().email().required(),
   password: Joi.string().required(),
 };
+
+export const CollectionSpec = {
+  title: Joi.string().required(),
+};
