@@ -25,3 +25,19 @@ export const testUsers = [
     password: "secret",
   },
 ];
+
+export const galway = {
+  title: "Best pubs in Galway"
+};
+
+export const testCollections = [
+  {
+    title: "Great places to eat in Cork"
+  },
+  {
+    title: "Street art in Waterford"
+  },
+  {
+    title: "Historic places in Dublin"
+  }
+];
