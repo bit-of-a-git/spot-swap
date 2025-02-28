@@ -33,4 +33,12 @@ export const collectionController = {
       return h.redirect(`/collection/${collection._id}`);
     },
   },
+
+  deleteSpot: {
+    handler: async function (request, h) {
+      const collection = await db.collectionStore.getCollectionById(request.params.id);
+      await db.spotStore.deleteSpot(request.params.spotid);
+      return h.redirect(`/collection/${collection._id}`);
+    },
+  },
 };

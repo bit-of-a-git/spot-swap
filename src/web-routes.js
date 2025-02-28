@@ -12,7 +12,9 @@ export const webRoutes = [
 
   { method: "GET", path: "/dashboard", config: dashboardController.index },
   { method: "POST", path: "/dashboard/addcollection", config: dashboardController.addCollection },
+  { method: "GET", path: "/dashboard/deletecollection/{id}", config: dashboardController.deleteCollection },
 
   { method: "GET", path: "/collection/{id}", config: collectionController.index },
   { method: "POST", path: "/collection/{id}/addspot", config: collectionController.addSpot },
+  { method: "GET", path: "/collection/{id}/deletespot/{spotid}", config: collectionController.deleteSpot },
 ];
