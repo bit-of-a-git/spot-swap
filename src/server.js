@@ -5,6 +5,7 @@ import { fileURLToPath } from "url";
 import Handlebars from "handlebars";
 import Joi from "joi";
 import Cookie from "@hapi/cookie";
+import dotenv from "dotenv";
 import { webRoutes } from "./web-routes.js";
 import { db } from "./models/db.js";
 import { apiRoutes } from "./api-routes.js";
@@ -42,8 +43,8 @@ async function init() {
 
   server.auth.strategy("session", "cookie", {
     cookie: {
-      name: process.env.COOKIE_NAME,
-      password: process.env.COOKIE_PASSWORD,
+      name: process.env.cookie_name,
+      password: process.env.cookie_password,
       isSecure: false,
     },
     redirectTo: "/",
