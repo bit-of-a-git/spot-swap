@@ -6,6 +6,9 @@
   "author": "",
   "type": "module",
   "main": "index.js",
+  "engines": {
+    "node": ">=16"
+  },
   "scripts": {
     "start": "nodemon src/server.js",
     "lint": "./node_modules/.bin/eslint . --ext .js"
