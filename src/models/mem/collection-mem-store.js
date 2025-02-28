@@ -15,8 +15,12 @@ export const collectionMemStore = {
   },
 
   async getCollectionById(id) {
-    const list = collections.find((collection) => collection._id === id);
-    list.spots = await spotMemStore.getSpotsByCollectionId(list._id);
+    let list = collections.find((collection) => collection._id === id);
+    if (list) {
+      list.spots = await spotMemStore.getSpotsByCollectionId(list._id);
+    } else {
+      list = null;
+    }
     return list;
   },
 
@@ -26,7 +30,7 @@ export const collectionMemStore = {
 
   async deleteCollectionById(id) {
     const index = collections.findIndex((collection) => collection._id === id);
-    collections.splice(index, 1);
+    if (index !== -1) collections.splice(index, 1);
   },
 
   async deleteAllCollections() {

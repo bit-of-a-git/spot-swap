@@ -18,8 +18,12 @@ export const collectionJsonStore = {
 
   async getCollectionById(id) {
     await db.read();
-    const list = db.data.collections.find((collection) => collection._id === id);
-    list.spots = await spotJsonStore.getSpotsByCollectionId(list._id);
+    let list = db.data.collections.find((collection) => collection._id === id);
+    if (list) {
+      list.spots = await spotJsonStore.getSpotsByCollectionId(list._id);
+    } else {
+      list = null;
+    }
     return list;
   },
 
@@ -31,7 +35,7 @@ export const collectionJsonStore = {
   async deleteCollectionById(id) {
     await db.read();
     const index = db.data.collections.findIndex((collection) => collection._id === id);
-    db.data.collections.splice(index, 1);
+    if (index !== -1) db.data.collections.splice(index, 1);
     await db.write();
   },
 

@@ -23,13 +23,17 @@ export const spotJsonStore = {
 
   async getSpotById(id) {
     await db.read();
-    return db.data.spots.find((spot) => spot._id === id);
+    const foundSpot = db.data.spots.find((spot) => spot._id === id);
+    if (!foundSpot) {
+      return null;
+    }
+    return foundSpot;
   },
 
   async deleteSpot(id) {
     await db.read();
     const index = db.data.spots.findIndex((spot) => spot._id === id);
-    db.data.spots.splice(index, 1);
+    if (index !== -1) db.data.spots.splice(index, 1);
     await db.write();
   },
 

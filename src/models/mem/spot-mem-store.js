@@ -19,7 +19,11 @@ export const spotMemStore = {
   },
 
   async getSpotById(id) {
-    return spots.find((spot) => spot._id === id);
+    const foundSpot = spots.find((spot) => spot._id === id);
+    if (!foundSpot) {
+      return null;
+    }
+    return foundSpot
   },
 
   async getCollectionSpots(spotId) {
@@ -28,7 +32,7 @@ export const spotMemStore = {
 
   async deleteSpot(id) {
     const index = spots.findIndex((spot) => spot._id === id);
-    spots.splice(index, 1);
+    if (index !== -1) spots.splice(index, 1);
   },
 
   async deleteAllSpots() {
