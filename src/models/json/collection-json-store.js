@@ -23,9 +23,9 @@ export const collectionJsonStore = {
     return list;
   },
 
-  async getUserCollections(userid) {
+  async getUserCollections(userId) {
     await db.read();
-    return db.data.collections.filter((collection) => collection.userid === userid);
+    return db.data.collections.filter((collection) => collection.userId === userId);
   },
 
   async deleteCollectionById(id) {

@@ -4,9 +4,11 @@ import { CollectionSpec } from "../models/joi-schemas.js";
 export const dashboardController = {
   index: {
     handler: async function (request, h) {
-      const collections = await db.collectionStore.getAllCollections();
+      const loggedInUser = request.auth.credentials;
+      const collections = await db.collectionStore.getUserCollections(loggedInUser._id);
       const viewData = {
         title: "SpotSwap Dashboard",
+        user: loggedInUser,
         collections: collections,
       };
       return h.view("dashboard-view", viewData);
@@ -22,7 +24,9 @@ export const dashboardController = {
       },
     },
     handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
       const newCollection = {
+        userId: loggedInUser._id,
         title: request.payload.title,
       };
       await db.collectionStore.addCollection(newCollection);

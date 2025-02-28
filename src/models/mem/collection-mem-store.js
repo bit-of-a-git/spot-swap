@@ -20,6 +20,10 @@ export const collectionMemStore = {
     return list;
   },
 
+  async getUserCollections(userId) {
+    return collections.filter((collection) => collection.userId === userId);
+  },
+
   async deleteCollectionById(id) {
     const index = collections.findIndex((collection) => collection._id === id);
     collections.splice(index, 1);
