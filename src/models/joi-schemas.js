@@ -13,4 +13,7 @@ export const CollectionSpec = {
 
 export const SpotSpec = {
   name: Joi.string().required(),
+  description: Joi.string().allow("").optional(),
+  latitude: Joi.number().min(-90).max(90).precision(6).required(),
+  longitude: Joi.number().min(-180).max(180).precision(6).required()
 };

@@ -25,6 +25,9 @@ export const collectionController = {
       const collection = await db.collectionStore.getCollectionById(request.params.id);
       const newSpot = {
         name: request.payload.name,
+        description: request.payload.description,
+        latitude: request.payload.latitude,
+        longitude: request.payload.longitude,
       };
       await db.spotStore.addSpot(collection._id, newSpot);
       return h.redirect(`/collection/${collection._id}`);
