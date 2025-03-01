@@ -6,6 +6,8 @@ import Handlebars from "handlebars";
 import Joi from "joi";
 import Cookie from "@hapi/cookie";
 import dotenv from "dotenv";
+import Inert from "@hapi/inert";
+import HapiSwagger from "hapi-swagger";
 import { webRoutes } from "./web-routes.js";
 import { db } from "./models/db.js";
 import { apiRoutes } from "./api-routes.js";
@@ -20,6 +22,13 @@ if (result.error) {
   process.exit(1);
 }
 
+const swaggerOptions = {
+  info: {
+    title: "SpotSwap API",
+    version: "0.1",
+  },
+};
+
 async function init() {
   const server = Hapi.server({
     port: process.env.PORT || 3000,
@@ -27,6 +36,15 @@ async function init() {
 
   await server.register(Vision);
   await server.register(Cookie);
+  await server.register(Inert);
+  await server.register([
+    Inert,
+    Vision,
+    {
+      plugin: HapiSwagger,
+      options: swaggerOptions,
+    },
+  ]);
   server.validator(Joi);
 
   server.views({
