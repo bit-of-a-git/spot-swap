@@ -1,6 +1,6 @@
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
-import { UserArray, UserSpec, IdSpec } from "../models/joi-schemas.js";
+import { UserArray, UserSpec, UserSpecPlus, IdSpec } from "../models/joi-schemas.js";
 import { validationError } from "./logger.js";
 
 export const userApi = {
@@ -15,8 +15,8 @@ export const userApi = {
       }
     },
     tags: ["api"],
-    description: "Get all userApi",
-    notes: "Returns details of all userApi",
+    description: "Get all users",
+    notes: "Returns details of all users",
     response: { schema: UserArray, failAction: validationError },
   },
 
@@ -35,9 +35,9 @@ export const userApi = {
     },
     tags: ["api"],
     description: "Get a specific user",
-    notes: "Returns user details",
-    response: { schema: UserSpec, failAction: validationError },
+    notes: "Returns user details matching the specified id",
     validate: { params: { id: IdSpec }, failAction: validationError },
+    response: { schema: UserSpecPlus, failAction: validationError },
   },
 
   create: {
@@ -57,7 +57,7 @@ export const userApi = {
     description: "Create a User",
     notes: "Returns the newly created user",
     validate: { payload: UserSpec, failAction: validationError },
-    response: { schema: UserSpec, failAction: validationError },
+    response: { schema: UserSpecPlus, failAction: validationError },
   },
 
   deleteAll: {
@@ -71,7 +71,7 @@ export const userApi = {
       }
     },
     tags: ["api"],
-    description: "Delete all userApi",
-    notes: "All userApi removed from Playtime",
+    description: "Delete all users",
+    notes: "Deletes all users from the SpotSwap database",
   },
 };
