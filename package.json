@@ -10,9 +10,11 @@
     "node": ">=16"
   },
   "scripts": {
-    "start": "nodemon src/server.js",
+    "start": "nodemon -e js,mjs,cjs src/server.js",
     "lint": "./node_modules/.bin/eslint . --ext .js",
-    "test": "mocha --ui tdd test/**/*.js -exit"
+    "test": "mocha --ui tdd test/**/*.js -exit",
+    "testapi" : "mocha --ui tdd test/api/**/*.js -exit",
+    "testmodels": "mocha --ui tdd test/models/**/*.js -exit"
   },
   "devDependencies": {
     "axios": "^1.8.1",
