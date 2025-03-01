@@ -1,11 +1,14 @@
 import { assert } from "chai";
+import { EventEmitter } from "events";
 import { db } from "../src/models/db.js";
 import { testCollections, galway } from "./fixtures.js";
+import { assertSubset } from "./test-utils.js";
+
+EventEmitter.setMaxListeners(25);
 
 suite("Collection Model tests", () => {
-
   setup(async () => {
-    db.init();
+    db.init("mongo");
     await db.collectionStore.deleteAllCollections();
     for (let i = 0; i < testCollections.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
@@ -15,7 +18,7 @@ suite("Collection Model tests", () => {
 
   test("create a collection", async () => {
     const collection = await db.collectionStore.addCollection(galway);
-    assert.equal(galway, collection);
+    assertSubset(galway, collection);
     assert.isDefined(collection._id);
   });
 
@@ -30,7 +33,7 @@ suite("Collection Model tests", () => {
   test("get a collection - success", async () => {
     const collection = await db.collectionStore.addCollection(galway);
     const returnedCollection = await db.collectionStore.getCollectionById(collection._id);
-    assert.equal(galway, collection);
+    assertSubset(galway, collection);
   });
 
   test("delete One Playist - success", async () => {

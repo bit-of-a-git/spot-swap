@@ -51,7 +51,7 @@ async function init() {
     validate: accountsController.validate,
   });
   server.auth.default("session");
-  
+
   db.init("json");
   server.route(webRoutes);
   server.route(apiRoutes);

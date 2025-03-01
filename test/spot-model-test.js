@@ -4,11 +4,10 @@ import { testCollections, testSpots, galway, derry, derryGirls, crane, testUsers
 import { assertSubset } from "./test-utils.js";
 
 suite("Spot Model tests", () => {
-
   let galwayList = null;
 
   setup(async () => {
-    db.init("json");
+    db.init("mongo");
     await db.collectionStore.deleteAllCollections();
     await db.spotStore.deleteAllSpots();
     galwayList = await db.collectionStore.addCollection(galway);
@@ -20,14 +19,14 @@ suite("Spot Model tests", () => {
 
   test("create single spot", async () => {
     const derryList = await db.collectionStore.addCollection(derry);
-    const spot = await db.spotStore.addSpot(derryList._id, derryGirls)
+    const spot = await db.spotStore.addSpot(derryList._id, derryGirls);
     assert.isNotNull(spot._id);
-    assertSubset (derryGirls, spot);
+    assertSubset(derryGirls, spot);
   });
 
   test("get multiple spots", async () => {
     const spots = await db.spotStore.getSpotsByCollectionId(galwayList._id);
-    assert.equal(spots.length, testSpots.length)
+    assert.equal(spots.length, testSpots.length);
   });
 
   test("delete all spots", async () => {
@@ -40,9 +39,9 @@ suite("Spot Model tests", () => {
 
   test("get a spot - success", async () => {
     const derryList = await db.collectionStore.addCollection(derry);
-    const spot = await db.spotStore.addSpot(derryList._id, derryGirls)
+    const spot = await db.spotStore.addSpot(derryList._id, derryGirls);
     const newSpot = await db.spotStore.getSpotById(spot._id);
-    assertSubset (derryGirls, newSpot);
+    assertSubset(derryGirls, newSpot);
   });
 
   test("delete One Spot - success", async () => {

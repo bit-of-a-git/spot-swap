@@ -10,7 +10,7 @@ export const spotJsonStore = {
   async addSpot(collectionId, spot) {
     await db.read();
     spot._id = v4();
-    spot.collectionid = collectionId;
+    spot.collectionId = collectionId;
     db.data.spots.push(spot);
     await db.write();
     return spot;
@@ -18,7 +18,7 @@ export const spotJsonStore = {
 
   async getSpotsByCollectionId(id) {
     await db.read();
-    return db.data.spots.filter((spot) => spot.collectionid === id);
+    return db.data.spots.filter((spot) => spot.collectionId === id);
   },
 
   async getSpotById(id) {
