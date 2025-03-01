@@ -60,14 +60,14 @@ export const spotApi = {
     auth: false,
     handler: async function (request, h) {
       try {
-        const track = await db.trackStore.getTrackById(request.params.id);
-        if (!track) {
-          return Boom.notFound("No Track with this id");
+        const spot = await db.spotStore.getSpotById(request.params.id);
+        if (!spot) {
+          return Boom.notFound("No Spot with this id");
         }
-        await db.trackStore.deleteTrack(track._id);
+        await db.spotStore.deleteSpot(spot._id);
         return h.response().code(204);
       } catch (err) {
-        return Boom.serverUnavailable("No Track with this id:", err);
+        return Boom.serverUnavailable("No Spot with this id:", err);
       }
     },
   },
