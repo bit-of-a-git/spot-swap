@@ -19,4 +19,6 @@ export const apiRoutes = [
   { method: "POST", path: "/api/collections/{id}/spots", config: spotApi.create },
   { method: "DELETE", path: "/api/spots", config: spotApi.deleteAll },
   { method: "DELETE", path: "/api/spots/{id}", config: spotApi.deleteOne },
+
+  { method: "POST", path: "/api/users/authenticate", config: userApi.authenticate },
 ];

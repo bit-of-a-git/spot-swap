@@ -12,12 +12,12 @@ export const UserCredentialsSpec = Joi.object()
 export const UserSpec = UserCredentialsSpec.keys({
   firstName: Joi.string().example("Homer").required(),
   lastName: Joi.string().example("Simpson").required(),
-}).label("UserDetails");
+}).label("User");
 
 export const UserSpecPlus = UserSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
-}).label("UserDetailsPlus");
+}).label("UserPlus");
 
 export const UserArraySpec = Joi.array().items(UserSpecPlus).label("UserArray");
 
@@ -33,7 +33,7 @@ export const SpotSpec = Joi.object()
 export const SpotSpecPlus = SpotSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
-}).label("SpotSpecPlus");
+}).label("SpotPlus");
 
 export const SpotArraySpec = Joi.array().items(SpotSpecPlus).label("SpotArray");
 
@@ -51,3 +51,10 @@ export const CollectionSpecPlus = CollectionSpec.keys({
 }).label("CollectionPlus");
 
 export const CollectionArraySpec = Joi.array().items(CollectionSpecPlus).label("CollectionArray");
+
+export const JWTSpec = Joi.object()
+  .keys({
+    success: Joi.boolean().example("true").required(),
+    token: Joi.string().example("xxxxx.yyyyy.zzzzz").required(),
+  })
+  .label("JWT");
