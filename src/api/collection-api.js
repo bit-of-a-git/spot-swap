@@ -5,7 +5,9 @@ import { validationError } from "./logger.js";
 
 export const collectionApi = {
   find: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const collections = await db.collectionStore.getAllCollections();
@@ -21,7 +23,9 @@ export const collectionApi = {
   },
 
   findOne: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     async handler(request) {
       try {
         const collection = await db.collectionStore.getCollectionById(request.params.id);
@@ -41,7 +45,9 @@ export const collectionApi = {
   },
 
   create: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const collection = request.payload;
@@ -62,7 +68,9 @@ export const collectionApi = {
   },
 
   deleteOne: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const collection = await db.collectionStore.getCollectionById(request.params.id);
@@ -81,7 +89,9 @@ export const collectionApi = {
   },
 
   deleteAll: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         await db.collectionStore.deleteAllCollections();

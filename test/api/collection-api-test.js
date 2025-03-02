@@ -8,9 +8,13 @@ suite("Collection API tests", () => {
   let user = null;
 
   setup(async () => {
+    spotswapService.clearAuth();
+    user = await spotswapService.createUser(maggie);
+    await spotswapService.authenticate(maggie);
     await spotswapService.deleteAllCollections();
     await spotswapService.deleteAllUsers();
     user = await spotswapService.createUser(maggie);
+    await spotswapService.authenticate(maggie);
     galway.userid = user._id;
   });
 
