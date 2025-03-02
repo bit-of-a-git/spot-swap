@@ -19,17 +19,35 @@ export const UserSpecPlus = UserSpec.keys({
   __v: Joi.number(),
 }).label("UserDetailsPlus");
 
-export const UserArray = Joi.array().items(UserSpecPlus).label("UserArray");
+export const UserArraySpec = Joi.array().items(UserSpecPlus).label("UserArray");
 
-export const CollectionSpec = {
-  title: Joi.string().required(),
-};
+export const SpotSpec = Joi.object()
+  .keys({
+    name: Joi.string().required(),
+    description: Joi.string().allow("").optional(),
+    latitude: Joi.number().min(-90).max(90).precision(6).required(),
+    longitude: Joi.number().min(-180).max(180).precision(6).required(),
+  })
+  .label("Spot");
 
-export const SpotSpec = {
-  name: Joi.string().required(),
-  description: Joi.string().allow("").optional(),
-  latitude: Joi.number().min(-90).max(90).precision(6).required(),
-  longitude: Joi.number().min(-180).max(180).precision(6).required(),
-};
+export const SpotSpecPlus = SpotSpec.keys({
+  _id: IdSpec,
+  __v: Joi.number(),
+}).label("SpotSpecPlus");
 
-export const SpotArray = Joi.array().items(SpotSpec).label("SpotArray");
+export const SpotArraySpec = Joi.array().items(SpotSpecPlus).label("SpotArray");
+
+export const CollectionSpec = Joi.object()
+  .keys({
+    title: Joi.string().required().example("Historical spots in Galway"),
+    userid: IdSpec,
+    spots: SpotArraySpec,
+  })
+  .label("Collection");
+
+export const CollectionSpecPlus = CollectionSpec.keys({
+  _id: IdSpec,
+  __v: Joi.number(),
+}).label("CollectionPlus");
+
+export const CollectionArraySpec = Joi.array().items(CollectionSpecPlus).label("CollectionArray");

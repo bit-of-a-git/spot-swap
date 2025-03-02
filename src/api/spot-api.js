@@ -1,5 +1,7 @@
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
+import { SpotArraySpec, SpotSpec, SpotSpecPlus, IdSpec } from "../models/joi-schemas.js";
+import { validationError } from "./logger.js";
 
 export const spotApi = {
   find: {
@@ -12,6 +14,10 @@ export const spotApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    response: { schema: SpotArraySpec, failAction: validationError },
+    description: "Get all spots",
+    notes: "Returns all spots",
   },
 
   findOne: {
@@ -27,6 +33,11 @@ export const spotApi = {
         return Boom.serverUnavailable("No spot with this id");
       }
     },
+    tags: ["api"],
+    description: "Get a specific spot",
+    notes: "Returns spot details matching the specified id",
+    validate: { params: { id: IdSpec }, failAction: validationError },
+    response: { schema: SpotSpecPlus, failAction: validationError },
   },
 
   create: {
@@ -42,6 +53,11 @@ export const spotApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Create a spot",
+    notes: "Returns the newly created spot",
+    validate: { payload: SpotSpec },
+    response: { schema: SpotSpecPlus, failAction: validationError },
   },
 
   deleteAll: {
@@ -54,6 +70,9 @@ export const spotApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Delete all spots",
+    notes: "Deletes all spots from the SpotSwap database",
   },
 
   deleteOne: {
@@ -70,5 +89,8 @@ export const spotApi = {
         return Boom.serverUnavailable("No Spot with this id:", err);
       }
     },
+    tags: ["api"],
+    description: "Delete a spot",
+    validate: { params: { id: IdSpec }, failAction: validationError },
   },
 };
