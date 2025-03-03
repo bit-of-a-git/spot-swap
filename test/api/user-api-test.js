@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import { spotswapService } from "./spotswap-service.js";
 import { assertSubset } from "../test-utils.js";
-import { maggie, testUsers } from "../fixtures.js";
+import { maggie, maggieCredentials, testUsers } from "../fixtures.js";
 
 const users = new Array(testUsers.length);
 
@@ -9,14 +9,14 @@ suite("User API tests", () => {
   setup(async () => {
     spotswapService.clearAuth();
     await spotswapService.createUser(maggie);
-    await spotswapService.authenticate(maggie);
+    await spotswapService.authenticate(maggieCredentials);
     await spotswapService.deleteAllUsers();
     for (let i = 0; i < testUsers.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
       users[i] = await spotswapService.createUser(testUsers[i]);
     }
     await spotswapService.createUser(maggie);
-    await spotswapService.authenticate(maggie);
+    await spotswapService.authenticate(maggieCredentials);
   });
   teardown(async () => {});
 
@@ -31,7 +31,7 @@ suite("User API tests", () => {
     assert.equal(returnedUsers.length, 4);
     await spotswapService.deleteAllUsers();
     await spotswapService.createUser(maggie);
-    await spotswapService.authenticate(maggie);
+    await spotswapService.authenticate(maggieCredentials);
     returnedUsers = await spotswapService.getAllUsers();
     assert.equal(returnedUsers.length, 1);
   });
@@ -54,7 +54,7 @@ suite("User API tests", () => {
   test("get a user - deleted user", async () => {
     await spotswapService.deleteAllUsers();
     await spotswapService.createUser(maggie);
-    await spotswapService.authenticate(maggie);
+    await spotswapService.authenticate(maggieCredentials);
     try {
       const returnedUser = await spotswapService.getUser(users[0]._id);
       assert.fail("Should not return a response");

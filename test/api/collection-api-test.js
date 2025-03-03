@@ -2,7 +2,7 @@ import { assert } from "chai";
 import { spotswapService } from "./spotswap-service.js";
 import { assertSubset } from "../test-utils.js";
 
-import { maggie, galway, testCollections } from "../fixtures.js";
+import { maggie, maggieCredentials, galway, testCollections } from "../fixtures.js";
 
 suite("Collection API tests", () => {
   let user = null;
@@ -10,11 +10,11 @@ suite("Collection API tests", () => {
   setup(async () => {
     spotswapService.clearAuth();
     user = await spotswapService.createUser(maggie);
-    await spotswapService.authenticate(maggie);
+    await spotswapService.authenticate(maggieCredentials);
     await spotswapService.deleteAllCollections();
     await spotswapService.deleteAllUsers();
     user = await spotswapService.createUser(maggie);
-    await spotswapService.authenticate(maggie);
+    await spotswapService.authenticate(maggieCredentials);
     galway.userId = user._id;
   });
 
