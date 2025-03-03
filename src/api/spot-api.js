@@ -5,7 +5,9 @@ import { validationError } from "./logger.js";
 
 export const spotApi = {
   find: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const spots = await db.spotStore.getAllSpots();
@@ -21,7 +23,9 @@ export const spotApi = {
   },
 
   findOne: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const spot = await db.spotStore.getSpotById(request.params.id);
@@ -41,7 +45,9 @@ export const spotApi = {
   },
 
   create: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const spot = await db.spotStore.addSpot(request.params.id, request.payload);
@@ -61,7 +67,9 @@ export const spotApi = {
   },
 
   deleteAll: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         await db.spotStore.deleteAllSpots();
@@ -76,7 +84,9 @@ export const spotApi = {
   },
 
   deleteOne: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const spot = await db.spotStore.getSpotById(request.params.id);

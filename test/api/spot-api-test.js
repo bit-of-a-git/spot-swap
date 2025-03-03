@@ -8,11 +8,15 @@ suite("Spot API tests", () => {
   let galwayList = null;
 
   setup(async () => {
-    await spotswapService.deleteAllCollections();
-    await spotswapService.deleteAllUsers();
-    await spotswapService.deleteAllSpots();
+    spotswapService.clearAuth();
     user = await spotswapService.createUser(maggie);
-    galway.userid = user._id;
+    await spotswapService.authenticate(maggie);
+    await spotswapService.deleteAllCollections();
+    await spotswapService.deleteAllSpots();
+    await spotswapService.deleteAllUsers();
+    user = await spotswapService.createUser(maggie);
+    await spotswapService.authenticate(maggie);
+    galway.userId = user._id;
     galwayList = await spotswapService.createCollection(galway);
   });
 

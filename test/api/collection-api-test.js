@@ -15,7 +15,7 @@ suite("Collection API tests", () => {
     await spotswapService.deleteAllUsers();
     user = await spotswapService.createUser(maggie);
     await spotswapService.authenticate(maggie);
-    galway.userid = user._id;
+    galway.userId = user._id;
   });
 
   teardown(async () => {});
@@ -40,7 +40,7 @@ suite("Collection API tests", () => {
 
   test("create multiple collections", async () => {
     for (let i = 0; i < testCollections.length; i += 1) {
-      testCollections[i].userid = user._id;
+      testCollections[i].userId = user._id;
       // eslint-disable-next-line no-await-in-loop
       await spotswapService.createCollection(testCollections[i]);
     }
