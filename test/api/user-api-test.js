@@ -7,11 +7,16 @@ const users = new Array(testUsers.length);
 
 suite("User API tests", () => {
   setup(async () => {
+    spotswapService.clearAuth();
+    await spotswapService.createUser(maggie);
+    await spotswapService.authenticate(maggie);
     await spotswapService.deleteAllUsers();
     for (let i = 0; i < testUsers.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
       users[i] = await spotswapService.createUser(testUsers[i]);
     }
+    await spotswapService.createUser(maggie);
+    await spotswapService.authenticate(maggie);
   });
   teardown(async () => {});
 
@@ -23,10 +28,12 @@ suite("User API tests", () => {
 
   test("delete all users", async () => {
     let returnedUsers = await spotswapService.getAllUsers();
-    assert.equal(returnedUsers.length, 3);
+    assert.equal(returnedUsers.length, 4);
     await spotswapService.deleteAllUsers();
+    await spotswapService.createUser(maggie);
+    await spotswapService.authenticate(maggie);
     returnedUsers = await spotswapService.getAllUsers();
-    assert.equal(returnedUsers.length, 0);
+    assert.equal(returnedUsers.length, 1);
   });
 
   test("get a user - success", async () => {
@@ -46,6 +53,8 @@ suite("User API tests", () => {
 
   test("get a user - deleted user", async () => {
     await spotswapService.deleteAllUsers();
+    await spotswapService.createUser(maggie);
+    await spotswapService.authenticate(maggie);
     try {
       const returnedUser = await spotswapService.getUser(users[0]._id);
       assert.fail("Should not return a response");
