@@ -66,4 +66,24 @@ export const collectionController = {
       parse: true,
     },
   },
+
+  deleteImage: {
+    handler: async function (request, h) {
+      try {
+        const collection = await db.collectionStore.getCollectionById(request.params.id);
+        if (collection.img) {
+          const url = new URL(collection.img);
+          const pathSegments = url.pathname.split("/");
+          const publicId = pathSegments[pathSegments.length - 1].split(".")[0];
+          await imageStore.deleteImage(publicId);
+          delete collection.img;
+          await db.collectionStore.updateCollection(collection);
+        }
+        return h.redirect(`/collection/${collection._id}`);
+      } catch (err) {
+        console.log(err);
+        return h.redirect(`/collection/${collection._id}`);
+      }
+    },
+  },
 };
