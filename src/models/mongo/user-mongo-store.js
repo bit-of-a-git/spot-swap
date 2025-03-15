@@ -38,4 +38,28 @@ export const userMongoStore = {
   async deleteAll() {
     await User.deleteMany({});
   },
+
+  async updateName(id, firstName, lastName) {
+    try {
+      await User.updateOne({ _id: id }, { $set: { firstName: firstName, lastName: lastName } });
+    } catch (error) {
+      console.log("bad id");
+    }
+  },
+
+  async updateEmail(id, newEmail) {
+    try {
+      await User.updateOne({ _id: id }, { $set: { email: newEmail } });
+    } catch (error) {
+      console.log("bad id");
+    }
+  },
+
+  async updatePassword(id, newPassword) {
+    try {
+      await User.updateOne({ _id: id }, { $set: { password: newPassword } });
+    } catch (error) {
+      console.log("bad id");
+    }
+  },
 };

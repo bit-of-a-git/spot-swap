@@ -1,0 +1,67 @@
+{{> menu active="profile"}}
+
+<div class="box has-background-black-ter">
+  <div class="title pb-5 has-text-white">Welcome, {{user.firstName}} {{user.lastName}}!</div>
+  <div class="box">
+    <div class="subtitle">Update your name:</div>
+    <form action="/edit-profile/update-name" method="POST">
+      <div class="field is-horizontal">
+        <div class="field-body">
+          <div class="field">
+            <label class="label">New First Name</label>
+            <input class="input" type="text" placeholder="First Name" name="firstName" required>
+          </div>
+          <div class="field">
+            <label class="label">New Last Name</label>
+            <input class="input" type="text" placeholder="Last Name" name="lastName" required>
+          </div>
+        </div>
+      </div>
+      <button class="button is-primary">Update Name</button>
+    </form>
+  </div>
+  <div class="box">
+    <div class="subtitle">Update your email:</div>
+    <form action="/edit-profile/update-email" method="POST">
+      <div class="field is-horizontal">
+        <div class="field-body">
+          <div class="field">
+            <label class="label">Previous Email</label>
+            <input class="input" type="email" placeholder="Previous Email" name="oldEmail" required>
+          </div>
+          <div class="field">
+            <label class="label">New Email</label>
+            <input class="input" type="email" placeholder="New Email" name="newEmail" required>
+          </div>
+        </div>
+      </div>
+      <button class="button is-primary">Update Email</button>
+    </form>
+  </div>
+    <div class="box">
+    <div class="subtitle">Update your password:</div>
+    <form action="/edit-profile/update-password" method="POST">
+      <div class="field is-horizontal">
+        <div class="field-body">
+          <div class="field">
+            <label class="label">Previous Password</label>
+            <input class="input" type="password" placeholder="Previous Password" name="currentPassword" required>
+          </div>
+        </div>
+      </div>
+      <div class="field is-horizontal">
+        <div class="field-body">
+          <div class="field">
+            <label class="label">New Password</label>
+            <input class="input" type="password" placeholder="New Password" name="newPassword" required>
+          </div>
+          <div class="field">
+            <label class="label">Confirm New Password</label>
+            <input class="input" type="password" placeholder="Confirm New Password" name="confirmNewPassword" required>
+          </div>
+        </div>
+      </div>
+      <button class="button is-primary">Update Password</button>
+    </form>
+  </div>
+</div>

@@ -69,4 +69,92 @@ export const accountsController = {
     }
     return { isValid: true, credentials: user };
   },
+
+  editProfile: {
+    handler: function (request, h) {
+      const user = request.auth.credentials;
+      if (user) {
+        const viewData = {
+          title: "Edit Profile",
+          user: user,
+          titleLink: "/dashboard",
+        };
+        return h.view("edit-profile", viewData);
+      }
+      return h.redirect("/");
+    },
+  },
+
+  updateName: {
+    validate: {
+      payload: NameSpec,
+      options: { abortEarly: false },
+      failAction: function (request, h, error) {
+        return h.view("edit-profile", { title: "Edit Profile Error", errors: error.details }).takeover().code(400);
+      },
+    },
+    handler: async function (request, h) {
+      const { firstName, lastName } = request.payload;
+      const user = request.auth.credentials;
+      try {
+        await db.userStore.updateName(user._id, firstName, lastName);
+        return h.redirect("/edit-profile");
+      } catch (err) {
+        console.log(err);
+        return h.redirect("/dashboard");
+      }
+    },
+  },
+
+  updateEmail: {
+    validate: {
+      payload: UpdateEmailSpec,
+      options: { abortEarly: false },
+      failAction: function (request, h, error) {
+        return h.view("edit-profile", { title: "Edit Profile Error", errors: error.details }).takeover().code(400);
+      },
+    },
+    handler: async function (request, h) {
+      const { oldEmail, newEmail } = request.payload;
+      const user = request.auth.credentials;
+      if (oldEmail === user.email) {
+        try {
+          await db.userStore.updateEmail(user, newEmail);
+          return h.redirect("/edit-profile");
+        } catch (err) {
+          console.log(err);
+          return h.redirect("/dashboard");
+        }
+      } else {
+        console.log("Previous email was incorrect.");
+        return h.redirect("/dashboard");
+      }
+    },
+  },
+
+  updatePassword: {
+    validate: {
+      payload: UpdatePasswordSpec,
+      options: { abortEarly: false },
+      failAction: function (request, h, error) {
+        return h.view("edit-profile", { title: "Edit Profile Error", errors: error.details }).takeover().code(400);
+      },
+    },
+    handler: async function (request, h) {
+      const { currentPassword, newPassword, confirmNewPassword } = request.payload;
+      const user = request.auth.credentials;
+      if (currentPassword === user.password && newPassword === confirmNewPassword) {
+        try {
+          await db.userStore.updatePassword(user, newPassword);
+          return h.redirect("/edit-profile");
+        } catch (err) {
+          console.log(err);
+          return h.redirect("/dashboard");
+        }
+      } else {
+        console.log("Previous password was incorrect.");
+        return h.redirect("/dashboard");
+      }
+    },
+  },
 };

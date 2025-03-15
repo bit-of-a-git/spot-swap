@@ -21,6 +21,28 @@ export const UserSpecPlus = UserSpec.keys({
 
 export const UserArraySpec = Joi.array().items(UserSpecPlus).label("UserArray");
 
+export const NameSpec = Joi.object()
+  .keys({
+    firstName: Joi.string().example("Homer").required(),
+    lastName: Joi.string().example("Simpson").required(),
+  })
+  .label("Name");
+
+export const UpdateEmailSpec = Joi.object()
+  .keys({
+    oldEmail: Joi.string().email().example("homer@simpson.com").required(),
+    newEmail: Joi.string().email().example("maggie@simpson.com").required(),
+  })
+  .label("Email");
+
+export const UpdatePasswordSpec = Joi.object()
+  .keys({
+    currentPassword: Joi.string().example("secret").required(),
+    newPassword: Joi.string().example("supersecret").required(),
+    confirmNewPassword: Joi.string().example("supersupersecret").required(),
+  })
+  .label("Password");
+
 export const SpotSpec = Joi.object()
   .keys({
     name: Joi.string().required(),
