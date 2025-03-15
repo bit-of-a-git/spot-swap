@@ -1,6 +1,7 @@
 import { accountsController } from "./controllers/accounts-controller.js";
 import { dashboardController } from "./controllers/dashboard-controller.js";
 import { collectionController } from "./controllers/collection-controller.js";
+import { spotController } from "./controllers/spot-controller.js";
 
 export const webRoutes = [
   { method: "GET", path: "/", config: accountsController.index },
