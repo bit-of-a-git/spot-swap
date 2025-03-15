@@ -9,14 +9,14 @@ export const spotMongoStore = {
   },
 
   async addSpot(collectionId, spot) {
-    spot.collectionid = collectionId;
+    spot.collectionId = collectionId;
     const newSpot = new Spot(spot);
     const spotObj = await newSpot.save();
     return this.getSpotById(spotObj._id);
   },
 
   async getSpotsByCollectionId(id) {
-    const spots = await Spot.find({ collectionid: id }).lean();
+    const spots = await Spot.find({ collectionId: id }).lean();
     return spots;
   },
 
