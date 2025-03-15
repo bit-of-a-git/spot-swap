@@ -21,4 +21,6 @@ export const webRoutes = [
   { method: "GET", path: "/collection/{id}/deleteimage", config: collectionController.deleteImage },
 
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
+
+  { method: "GET", path: "/spots", config: spotController.index },
 ];

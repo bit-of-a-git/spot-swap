@@ -1,0 +1,17 @@
+{{> welcome-menu active="spots"}}
+{{#each spots}}
+<section class="section">
+  <div class="title">
+    {{name}}
+  </div>
+  <div class="column">
+    {{description}}
+  </div>
+  <div class="column">
+    Lat: {{latitude}}
+  </div>
+  <div class="column">
+    Long: {{longitude}}
+  </div>
+</section>
+{{/each}}
