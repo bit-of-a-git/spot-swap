@@ -2,6 +2,7 @@
 
 <div class="box has-background-black-ter">
   <div class="title pb-5 has-text-white">Welcome, {{user.firstName}} {{user.lastName}}!</div>
+  <div class="subtitle has-text-white">Current email: {{user.email}}</div>
   <div class="box">
     <div class="subtitle">Update your name:</div>
     <form action="/edit-profile/update-name" method="POST">
