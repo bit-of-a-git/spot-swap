@@ -20,6 +20,17 @@
         <input class="input" type="number" placeholder="00.00" name="longitude" step="0.000001" min="-180" max="180"
           required>
       </div>
+      <div class="field">
+        <label class="label">Category</label>
+        <div class="select">
+          <select name="category" required>
+            <option value="" disabled selected>Select a category</option>
+            {{#each categories}}
+              <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
     </div>
   </div>
   <button class="button is-primary">Add Track</button>

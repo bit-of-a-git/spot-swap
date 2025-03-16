@@ -11,6 +11,10 @@ const spotSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Collection",
   },
+  categoryId: {
+    type: Schema.Types.ObjectId,
+    ref: "Category",
+  },
 });
 
 export const Spot = Mongoose.model("Spot", spotSchema);

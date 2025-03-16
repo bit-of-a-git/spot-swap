@@ -8,8 +8,9 @@ export const spotMongoStore = {
     return spots;
   },
 
-  async addSpot(collectionId, spot) {
+  async addSpot(collectionId, categoryId, spot) {
     spot.collectionId = collectionId;
+    spot.categoryId = categoryId;
     const newSpot = new Spot(spot);
     const spotObj = await newSpot.save();
     return this.getSpotById(spotObj._id);
@@ -17,6 +18,11 @@ export const spotMongoStore = {
 
   async getSpotsByCollectionId(id) {
     const spots = await Spot.find({ collectionId: id }).lean();
+    return spots;
+  },
+
+  async getSpotsByCategoryId(id) {
+    const spots = await Spot.find({ categoryId: id }).lean();
     return spots;
   },
 

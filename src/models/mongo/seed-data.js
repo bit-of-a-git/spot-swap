@@ -35,6 +35,36 @@ export const seedData = {
       userId: "->users.homer",
     },
   },
+  categories: {
+    _model: "Category",
+    food: {
+      name: "Food & Drink",
+    },
+    nature: {
+      name: "Nature & Outdoors",
+    },
+    history: {
+      name: "Historical Sites",
+    },
+    culture: {
+      name: "Art & Culture",
+    },
+    nightlife: {
+      name: "Nightlife & Entertainment",
+    },
+    shopping: {
+      name: "Shopping",
+    },
+    adventure: {
+      name: "Adventure & Sports",
+    },
+    relaxation: {
+      name: "Relaxation & Wellness",
+    },
+    unusual: {
+      name: "Unusual Experiences",
+    },
+  },
   spots: {
     _model: "Spot",
     spot_1: {
@@ -44,6 +74,7 @@ export const seedData = {
       latitude: 54.25326,
       longitude: -8.55774,
       collectionId: "->collections.sligo",
+      categoryId: "->categories.nature",
     },
     spot_2: {
       name: "Quiet Man Statue",
@@ -51,6 +82,7 @@ export const seedData = {
       latitude: 53.540515,
       longitude: -9.286646,
       collectionId: "->collections.cong",
+      categoryId: "->categories.culture",
     },
     spot_3: {
       name: "Titanic Belfast",
@@ -58,6 +90,7 @@ export const seedData = {
       latitude: 54.60815,
       longitude: -5.909918,
       collectionId: "->collections.belfast",
+      categoryId: "->categories.history",
     },
   },
 };
