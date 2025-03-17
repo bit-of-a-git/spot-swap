@@ -1,17 +1,50 @@
 {{> welcome-menu active="spots"}}
-{{#each spots}}
-<section class="section">
-  <div class="title">
-    {{name}}
+<div class="field">
+  <label class="label">Filter by Category</label>
+  <div class="select">
+    <select id="categoryFilter" required>
+      <option value="" selected>All Categories</option>
+      {{#each categories }}
+        <option value="{{this._id}}">{{this.name}}</option>
+      {{/each}}
+    </select>
   </div>
-  <div class="column">
-    {{description}}
-  </div>
-  <div class="column">
-    Lat: {{latitude}}
-  </div>
-  <div class="column">
-    Long: {{longitude}}
-  </div>
-</section>
-{{/each}}
+</div>
+<div id="spotsContainer">
+  {{#if spots.length }}
+    {{#each spots }}
+      <section class="section">
+        <div class="title">{{name}}</div>
+        <div class="column">{{description}}</div>
+        <div class="column">Lat: {{latitude}}</div>
+        <div class="column">Long: {{longitude}}</div>
+      </section>
+    {{/each}}
+  {{else}}
+    <section class="section">
+      <div class="title">No Spots in Category</div>
+    </section>
+  {{/if}}
+</div>
+<script>
+  document.getElementById("categoryFilter").addEventListener("change", async function() {
+    const selectedCategory = this.value;
+    const url = new URL(window.location.href);
+    if (selectedCategory) {
+      url.searchParams.set("categoryId", selectedCategory);
+    } else {
+      url.searchParams.delete("categoryId");
+    }
+
+    const response = await fetch(url.toString(), {
+      headers: {
+        "X-Requested-With": "XMLHttpRequest"
+      }
+    });
+    const html = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    const newSpotsContainer = doc.getElementById("spotsContainer");
+    document.getElementById("spotsContainer").innerHTML = newSpotsContainer.innerHTML;
+  });
+</script>

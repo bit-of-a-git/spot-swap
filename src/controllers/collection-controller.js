@@ -1,3 +1,4 @@
+import Joi from "joi";
 import { db } from "../models/db.js";
 import { SpotSpec } from "../models/joi-schemas.js";
 import { imageStore } from "../models/image-store.js";
