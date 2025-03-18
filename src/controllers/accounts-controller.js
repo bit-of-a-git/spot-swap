@@ -24,9 +24,18 @@ export const accountsController = {
       },
     },
     handler: async function (request, h) {
-      const user = request.payload;
-      await db.userStore.addUser(user);
-      return h.redirect("/");
+      const newUser = request.payload;
+      // Checks if there are any admin users in the database. If not, sets the first user to be an admin.
+      // https://github.com/ki321g/Rugby-Club-POI/blob/main/src/controllers/accounts-controller.js
+      const allUsers = await db.userStore.getAllUsers();
+      const adminUsers = allUsers.filter((user) => user.role === "admin");
+      if (adminUsers.length === 0) {
+        newUser.role = "admin";
+      } else {
+        newUser.role = "user";
+      }
+      await db.userStore.addUser(newUser);
+      return h.redirect("/login");
     },
   },
   showLogin: {
