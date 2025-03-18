@@ -1,0 +1,27 @@
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Second Name</th>
+      <th>Email</th>
+      <th>Password</th>
+      <th>Account Type</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each users }}
+      <tr>
+        <td>{{firstName}}</td>
+        <td>{{lastName}}</td>
+        <td>{{email}}</td>
+        <td>{{password}}</td>
+        <td>{{role}}</td>
+        <td>
+          <a href="/deleteuser/{{_id}}" class="ui icon button">
+            <i class="fas fa-trash"></i>
+          </a>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

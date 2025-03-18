@@ -7,6 +7,7 @@ const userSchema = new Schema({
   lastName: String,
   email: String,
   password: String,
+  role: { type: String, enum: ["admin", "user"], default: "user" },
 });
 
 export const User = Mongoose.model("User", userSchema);

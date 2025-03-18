@@ -28,4 +28,7 @@ export const webRoutes = [
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
 
   { method: "GET", path: "/spots", config: spotController.index },
+
+  { method: "GET", path: "/admin", config: adminController.index },
+  { method: "GET", path: "/deleteuser/{id}", config: adminController.deleteUser },
 ];

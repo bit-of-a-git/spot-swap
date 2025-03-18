@@ -1,23 +1,33 @@
 export const seedData = {
   users: {
     _model: "User",
+    admin: {
+      firstName: "David",
+      lastName: "O' Connor",
+      email: "admin@spotswap.com",
+      password: "adminsecretpassword",
+      role: "admin",
+    },
     homer: {
       firstName: "Homer",
       lastName: "Simpson",
       email: "homer@simpson.com",
       password: "secret",
+      role: "user",
     },
     marge: {
       firstName: "Marge",
       lastName: "Simpson",
       email: "marge@simpson.com",
       password: "secret",
+      role: "user",
     },
     bart: {
       firstName: "Bart",
       lastName: "Simpson",
       email: "bart@simpson.com",
       password: "secret",
+      role: "user",
     },
   },
   collections: {
