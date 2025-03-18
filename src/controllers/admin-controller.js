@@ -14,11 +14,13 @@ export const adminController = {
     pre: [{ method: isAdmin }],
     handler: async function (request, h) {
       const users = await db.userStore.getAllUsers();
+      const collections = await db.collectionStore.getAllCollections();
       const loggedInUser = request.auth.credentials;
       const viewData = {
         title: "Admin Console",
         users: users.filter((user) => !user._id.equals(loggedInUser._id)),
-        titleLink: "/dashboard",
+        collections: collections,
+        titleLink: "/admin",
       };
       return h.view("admin-view", viewData);
     },
