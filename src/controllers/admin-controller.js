@@ -17,7 +17,7 @@ export const adminController = {
       const loggedInUser = request.auth.credentials;
       const viewData = {
         title: "Admin Console",
-        users: users,
+        users: users.filter((user) => !user._id.equals(loggedInUser._id)),
       };
       return h.view("admin-view", viewData);
     },
