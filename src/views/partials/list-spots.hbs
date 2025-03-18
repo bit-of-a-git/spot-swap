@@ -8,25 +8,16 @@
     </tr>
   </thead>
   <tbody>
-    {{#each collection.spots}}
+    {{#each collection.spots }}
       <tr>
+        <td>{{name}}</td>
+        <td>{{description}}</td>
+        <td>{{latitude}}</td>
+        <td>{{longitude}}</td>
+        <td>{{category.name}}</td>
         <td>
-          {{name}}
-        </td>
-        <td>
-          {{description}}
-        </td>
-        <td>
-          {{latitude}}
-        </td>
-        <td>
-          {{longitude}}
-        </td>
-        <td>
-          {{category.name}}
-        </td>
-        <td>
-          <a href="/collection/{{../collection._id}}/deletespot/{{_id}}" class="ui icon button">
+          <a href="/collection/{{../collection._id}}/deletespot/{{_id}}"
+             class="ui icon button">
             <i class="fas fa-trash"></i>
           </a>
         </td>
