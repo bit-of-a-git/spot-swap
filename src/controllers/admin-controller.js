@@ -1,8 +1,17 @@
+import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
-import {} from "../models/joi-schemas.js";
+
+async function isAdmin(request, h) {
+  const user = request.auth.credentials;
+  if (user.role !== "admin") {
+    throw Boom.forbidden("You are not authorized to access this resource");
+  }
+  return h.continue;
+}
 
 export const adminController = {
   index: {
+    pre: [{ method: isAdmin }],
     handler: async function (request, h) {
       const users = await db.userStore.getAllUsers();
       const loggedInUser = request.auth.credentials;
@@ -14,6 +23,7 @@ export const adminController = {
     },
   },
   deleteUser: {
+    pre: [{ method: isAdmin }],
     handler: async function (request, h) {
       await db.userStore.deleteUserById(request.params.id);
       return h.redirect("/admin");
