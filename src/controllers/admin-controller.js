@@ -18,6 +18,7 @@ export const adminController = {
       const viewData = {
         title: "Admin Console",
         users: users.filter((user) => !user._id.equals(loggedInUser._id)),
+        titleLink: "/dashboard",
       };
       return h.view("admin-view", viewData);
     },

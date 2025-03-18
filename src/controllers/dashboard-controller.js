@@ -10,6 +10,7 @@ export const dashboardController = {
         title: "SpotSwap Dashboard",
         user: loggedInUser,
         collections: collections,
+        titleLink: "/dashboard",
       };
       return h.view("dashboard-view", viewData);
     },
