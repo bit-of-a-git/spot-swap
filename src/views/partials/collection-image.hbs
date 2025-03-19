@@ -1,14 +1,16 @@
 <div class="card">
-  <div class="card-image">
-    <figure class="image is-256x256">
-      <img src={{collection.img}}>
-      <a href="/collection/{{collection._id}}/deleteimage" class="button">
-        <i class="fas fa-trash"></i>
-      </a>
-    </figure>
-  </div>
+  {{#if img }}
+    <div class="card-image">
+      <figure class="image is-256x256">
+        <img src={{img}}>
+        <a href="/collection/{{_id}}/deleteimage" class="button">
+          <i class="fas fa-trash"></i>
+        </a>
+      </figure>
+    </div>
+  {{/if}}
   <div class="card-content">
-    <form action="/collection/{{collection._id}}/uploadimage"
+    <form action="/collection/{{_id}}/uploadimage"
           method="POST"
           enctype="multipart/form-data">
       <div id="file-select" class="file has-name is-fullwidth">
