@@ -1,0 +1,7 @@
+{{> admin-menu active="collections"}}
+<section class="section">
+  {{#each users }}
+    <div class="title">{{firstName}} {{lastName}}'s Collections</div>
+    {{>list-collections}}
+  {{/each}}
+</section>

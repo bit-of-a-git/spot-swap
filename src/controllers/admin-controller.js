@@ -14,12 +14,10 @@ export const adminController = {
     pre: [{ method: isAdmin }],
     handler: async function (request, h) {
       const users = await db.userStore.getAllUsers();
-      const collections = await db.collectionStore.getAllCollections();
       const loggedInUser = request.auth.credentials;
       const viewData = {
         title: "Admin Console",
         users: users.filter((user) => !user._id.equals(loggedInUser._id)),
-        collections: collections,
         titleLink: "/admin",
       };
       return h.view("admin-view", viewData);
@@ -30,6 +28,27 @@ export const adminController = {
     handler: async function (request, h) {
       await db.userStore.deleteUserById(request.params.id);
       return h.redirect("/admin");
+    },
+  },
+  collections: {
+    pre: [{ method: isAdmin }],
+    handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
+      const users = await db.userStore.getAllUsers();
+      const filteredUsers = users.filter((user) => !user._id.equals(loggedInUser._id));
+
+      const usersAndCollections = filteredUsers.map(async (user) => {
+        user.collections = await db.collectionStore.getUserCollections(user._id);
+        return user;
+      });
+      const updatedUsers = await Promise.all(usersAndCollections);
+
+      const viewData = {
+        title: "Admin Console",
+        users: updatedUsers,
+        titleLink: "/admin",
+      };
+      return h.view("admin-collections", viewData);
     },
   },
 };

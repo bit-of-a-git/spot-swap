@@ -1,5 +1,6 @@
 import Mongoose from "mongoose";
 import { User } from "./user.js";
+import { db } from "../db.js";
 
 export const userMongoStore = {
   async getAllUsers() {

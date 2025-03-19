@@ -5,7 +5,8 @@
       <div class="navbar-item">
         <div class="buttons">
           <a id="dashboard" class="button" href="/admin">Dashboard</a>
-          <a id="dashboard" class="button" href="/analytics">Analytics</a>
+          <a id="collections" class="button" href="/collections">Collections</a>
+          <a id="analytics" class="button" href="/analytics">Analytics</a>
           <div class="dropdown">
             <div class="dropdown-trigger">
               <button id="profile"
@@ -37,5 +38,12 @@
   dropdown.addEventListener('click', function(event) {
   event.stopPropagation();
   dropdown.classList.toggle('is-active');
-});
+  });
+
+  // Closes dropdowns when clicking outside
+  document.addEventListener('click', function() {
+    dropdowns.forEach(dropdown => {
+      dropdown.classList.remove('is-active');
+    });
+  });
 </script>
