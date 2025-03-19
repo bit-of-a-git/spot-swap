@@ -29,6 +29,7 @@ export const userMongoStore = {
 
   async deleteUserById(id) {
     try {
+      await db.collectionStore.deleteCollectionsByUserId(id);
       await User.deleteOne({ _id: id });
     } catch (error) {
       console.log("bad id");
