@@ -1,5 +1,6 @@
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
+import { analytics } from "../utils/analytics.js";
 
 async function isAdmin(request, h) {
   const user = request.auth.credentials;
@@ -49,6 +50,23 @@ export const adminController = {
         titleLink: "/admin",
       };
       return h.view("admin-collections", viewData);
+    },
+  },
+  analytics: {
+    pre: [{ method: isAdmin }],
+    handler: async function (request, h) {
+      const { totalUsersNum, totalCollectionsNum, totalSpotsNum, userWithMostSpots, collectionWithMostSpots, averageSpotsPerCollection } = await analytics();
+      const viewData = {
+        title: "Analytics",
+        totalUsersNum: totalUsersNum,
+        totalCollectionsNum: totalCollectionsNum,
+        totalSpotsNum: totalSpotsNum,
+        userWithMostSpots: userWithMostSpots,
+        collectionWithMostSpots: collectionWithMostSpots,
+        averageSpotsPerCollection: averageSpotsPerCollection,
+        titleLink: "/admin",
+      };
+      return h.view("analytics-view", viewData);
     },
   },
 };
