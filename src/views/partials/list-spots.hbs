@@ -1,7 +1,8 @@
+<div class="subtitle">List of Spots</div>
 <table class="table is-fullwidth">
   <thead>
     <tr>
-      <th>Spot</th>
+      <th>Name</th>
       <th>Description</th>
       <th>Latitude</th>
       <th>Longitude</th>
@@ -17,7 +18,8 @@
         <td>{{category.name}}</td>
         <td>
           <a href="/collection/{{../collection._id}}/deletespot/{{_id}}"
-             class="ui icon button">
+             class="ui icon button is-danger"
+             title="Delete Spot">
             <i class="fas fa-trash"></i>
           </a>
         </td>
