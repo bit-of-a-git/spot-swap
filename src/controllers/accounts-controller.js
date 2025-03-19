@@ -57,9 +57,13 @@ export const accountsController = {
       const { email, password } = request.payload;
       const user = await db.userStore.getUserByEmail(email);
       if (!user || user.password !== password) {
-        return h.redirect("/");
+        const errors = [{ message: "Invalid email or password" }];
+        return h.view("login-view", { title: "Log in error", errors: errors }).code(400);
       }
       request.cookieAuth.set({ id: user._id });
+      if (user.role === "admin") {
+        return h.redirect("/admin");
+      }
       return h.redirect("/dashboard");
     },
   },

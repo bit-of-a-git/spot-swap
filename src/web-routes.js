@@ -31,5 +31,7 @@ export const webRoutes = [
   { method: "GET", path: "/spots", config: spotController.index },
 
   { method: "GET", path: "/admin", config: adminController.index },
+  { method: "GET", path: "/collections", config: adminController.collections },
   { method: "GET", path: "/deleteuser/{id}", config: adminController.deleteUser },
+  { method: "GET", path: "/analytics", config: adminController.analytics },
 ];

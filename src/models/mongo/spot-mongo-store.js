@@ -42,6 +42,14 @@ export const spotMongoStore = {
     }
   },
 
+  async deleteSpotsByCollectionId(collectionId) {
+    try {
+      await Spot.deleteMany({ collectionId: collectionId });
+    } catch (error) {
+      console.log("bad collection id");
+    }
+  },
+
   async deleteAllSpots() {
     await Spot.deleteMany({});
   },

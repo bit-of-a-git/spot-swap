@@ -5,11 +5,15 @@ export const dashboardController = {
   index: {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
+      if (loggedInUser.role === "admin") {
+        return h.redirect("/admin");
+      }
       const collections = await db.collectionStore.getUserCollections(loggedInUser._id);
       const viewData = {
         title: "SpotSwap Dashboard",
         user: loggedInUser,
         collections: collections,
+        titleLink: "/dashboard",
       };
       return h.view("dashboard-view", viewData);
     },
