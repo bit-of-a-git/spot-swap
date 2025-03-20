@@ -54,12 +54,13 @@ export const spotMongoStore = {
     await Spot.deleteMany({});
   },
 
-  async updateSpot(spot, updatedSpot) {
-    const spotDoc = await Spot.findOne({ _id: spot._id });
+  async updateSpot(updatedSpot) {
+    const spotDoc = await Spot.findOne({ _id: updatedSpot._id });
     spotDoc.name = updatedSpot.name;
     spotDoc.description = updatedSpot.description;
     spotDoc.latitude = updatedSpot.latitude;
     spotDoc.longitude = updatedSpot.longitude;
+    spotDoc.img = updatedSpot.img;
     await spotDoc.save();
   },
 };
