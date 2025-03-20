@@ -9,8 +9,13 @@ export const spotController = {
       let spots;
       const categories = await db.categoryStore.getAllCategories();
       const { categoryId } = await request.query;
-      if (categoryId) {
+      const { countyFilter } = await request.query;
+      if (categoryId && countyFilter) {
+        spots = await db.spotStore.getSpotsByCategoryAndCounty(categoryId, countyFilter);
+      } else if (categoryId) {
         spots = await db.spotStore.getSpotsByCategoryId(categoryId);
+      } else if (countyFilter) {
+        spots = await db.spotStore.getSpotsByCounty(countyFilter);
       } else {
         spots = await db.spotStore.getAllSpots();
       }

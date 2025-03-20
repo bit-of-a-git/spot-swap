@@ -26,6 +26,20 @@ export const spotMongoStore = {
     return spots;
   },
 
+  async getSpotsByCounty(county) {
+    const collections = await Collection.find({ county: county }).lean();
+    const collectionIds = collections.map((collection) => collection._id);
+    const spots = await Spot.find({ collectionId: { $in: collectionIds } }).lean();
+    return spots;
+  },
+
+  async getSpotsByCategoryAndCounty(categoryId, county) {
+    const collections = await Collection.find({ county: county }).lean();
+    const collectionIds = collections.map((collection) => collection._id);
+    const spots = await Spot.find({ collectionId: { $in: collectionIds }, categoryId: categoryId }).lean();
+    return spots;
+  },
+
   async getSpotById(id) {
     if (Mongoose.isValidObjectId(id)) {
       const spot = await Spot.findOne({ _id: id }).lean();

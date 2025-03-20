@@ -35,14 +35,17 @@ export const seedData = {
     sligo: {
       title: "Best views in Sligo",
       userId: "->users.bart",
+      county: "Sligo",
     },
     cong: {
       title: "Quiet Man spots in Cong",
       userId: "->users.marge",
+      county: "Mayo",
     },
     belfast: {
       title: "Titanic locations in Belfast",
       userId: "->users.homer",
+      county: "Antrim",
     },
   },
   categories: {
