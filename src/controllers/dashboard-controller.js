@@ -32,6 +32,7 @@ export const dashboardController = {
       const newCollection = {
         userId: loggedInUser._id,
         title: request.payload.title,
+        county: request.payload.county,
       };
       await db.collectionStore.addCollection(newCollection);
       return h.redirect("/dashboard");

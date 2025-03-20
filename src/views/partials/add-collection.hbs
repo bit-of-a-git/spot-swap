@@ -1,10 +1,55 @@
 <form action="/dashboard/addcollection" method="POST">
-  <div class="field">
-    <label class="label">Collection Name</label>
-    <input class="input"
-           type="text"
-           placeholder="Enter collection name"
-           name="title">
+  <label>Enter Collection Details:</label>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <label class="label">Collection Name</label>
+        <input class="input"
+               type="text"
+               placeholder="Enter collection name"
+               name="title">
+      </div>
+      <div class="field">
+        <label class="label">County</label>
+        <div class="select">
+          <select name="county" required>
+            <option value="" disabled selected>Select a county</option>
+            <option value="Antrim">Co. Antrim</option>
+            <option value="Armagh">Co. Armagh</option>
+            <option value="Carlow">Co. Carlow</option>
+            <option value="Cavan">Co. Cavan</option>
+            <option value="Clare">Co. Clare</option>
+            <option value="Cork">Co. Cork</option>
+            <option value="Derry">Co. Derry</option>
+            <option value="Donegal">Co. Donegal</option>
+            <option value="Down">Co. Down</option>
+            <option value="Dublin">Co. Dublin</option>
+            <option value="Fermanagh">Co. Fermanagh</option>
+            <option value="Galway">Co. Galway</option>
+            <option value="Kerry">Co. Kerry</option>
+            <option value="Kildare">Co. Kildare</option>
+            <option value="Kilkenny">Co. Kilkenny</option>
+            <option value="Laois">Co. Laois</option>
+            <option value="Leitrim">Co. Leitrim</option>
+            <option value="Limerick">Co. Limerick</option>
+            <option value="Longford">Co. Longford</option>
+            <option value="Louth">Co. Louth</option>
+            <option value="Mayo">Co. Mayo</option>
+            <option value="Meath">Co. Meath</option>
+            <option value="Monaghan">Co. Monaghan</option>
+            <option value="Offaly">Co. Offaly</option>
+            <option value="Roscommon">Co. Roscommon</option>
+            <option value="Sligo">Co. Sligo</option>
+            <option value="Tipperary">Co. Tipperary</option>
+            <option value="Tyrone">Co. Tyrone</option>
+            <option value="Waterford">Co. Waterford</option>
+            <option value="Westmeath">Co. Westmeath</option>
+            <option value="Wexford">Co. Wexford</option>
+            <option value="Wicklow">Co. Wicklow</option>
+          </select>
+        </div>
+      </div>
+    </div>
   </div>
   <button class="button is-link">Add Collection</button>
 </form>
