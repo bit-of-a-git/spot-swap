@@ -7,6 +7,7 @@ const spotSchema = new Schema({
   description: String,
   latitude: Number,
   longitude: Number,
+  img: String,
   collectionId: {
     type: Schema.Types.ObjectId,
     ref: "Collection",

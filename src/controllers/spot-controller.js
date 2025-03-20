@@ -22,4 +22,50 @@ export const spotController = {
       return h.view("spot-view", viewData);
     },
   },
+  uploadImage: {
+    handler: async function (request, h) {
+      const collectionId = request.params.id;
+      const spotId = request.params.spotid;
+      try {
+        const spot = await db.spotStore.getSpotById(spotId);
+        const file = request.payload.imagefile;
+        if (Object.keys(file).length > 0) {
+          const url = await imageStore.uploadImage(request.payload.imagefile);
+          spot.img = url;
+          await db.spotStore.updateSpot(spot);
+        }
+        return h.redirect(`/collection/${spot.collectionId}`);
+      } catch (err) {
+        console.log(err);
+        return h.redirect(`/collection/${spot.collectionId}`);
+      }
+    },
+    payload: {
+      multipart: true,
+      output: "data",
+      maxBytes: 209715200,
+      parse: true,
+    },
+  },
+  deleteImage: {
+    handler: async function (request, h) {
+      const collectionId = request.params.id;
+      const spotId = request.params.spotid;
+      try {
+        const spot = await db.spotStore.getSpotById(spotId);
+        if (spot.img) {
+          const url = new URL(spot.img);
+          const pathSegments = url.pathname.split("/");
+          const publicId = pathSegments[pathSegments.length - 1].split(".")[0];
+          await imageStore.deleteImage(publicId);
+          delete spot.img;
+          await db.spotStore.updateSpot(spot);
+        }
+        return h.redirect(`/collection/${collectionId}`);
+      } catch (err) {
+        console.log(err);
+        return h.redirect(`/collection/${collectionId}`);
+      }
+    },
+  },
 };

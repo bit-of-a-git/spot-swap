@@ -29,6 +29,8 @@ export const webRoutes = [
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
 
   { method: "GET", path: "/spots", config: spotController.index },
+  { method: "POST", path: "/collection/{id}/uploadspotimage/{spotid}", config: spotController.uploadImage },
+  { method: "GET", path: "/collection/{id}/deletespotimage/{spotid}", config: spotController.deleteImage },
 
   { method: "GET", path: "/admin", config: adminController.index },
   { method: "GET", path: "/collections", config: adminController.collections },

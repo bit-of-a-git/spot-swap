@@ -6,6 +6,8 @@
       <th>Description</th>
       <th>Latitude</th>
       <th>Longitude</th>
+      <th>Image</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -15,7 +17,44 @@
         <td>{{description}}</td>
         <td>{{latitude}}</td>
         <td>{{longitude}}</td>
-        <td>{{category.name}}</td>
+        <td>
+          <div class="card">
+            {{#if img }}
+              <div class="card-image">
+                <figure class="image is-256x256">
+                  <img src={{img}}>
+                  <a href="/collection/{{../collection._id}}/deletespotimage/{{_id}}"
+                     class="button">
+                    <i class="fas fa-trash"></i>
+                  </a>
+                </figure>
+              </div>
+            {{/if}}
+            <div class="card-content">
+              <form action="/collection/{{../collection._id}}/uploadspotimage/{{_id}}"
+                    method="POST"
+                    enctype="multipart/form-data">
+                <div id="file-select" class="file has-name is-fullwidth">
+                  <label class="file-label">
+                    <input class="file-input"
+                           name="imagefile"
+                           type="file"
+                           name="resume"
+                           accept="image/png, image/jpeg">
+                    <span class="file-cta">
+                      <span class="file-icon">
+                        <i class="fas fa-upload"></i>
+                      </span>
+                      <span class="file-label">Choose a file…</span>
+                    </span>
+                    <span class="file-name"></span>
+                  </label>
+                  <button type="submit" class="button is-info">Upload</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </td>
         <td>
           <a href="/collection/{{../collection._id}}/deletespot/{{_id}}"
              class="ui icon button is-danger"
@@ -27,3 +66,12 @@
     {{/each}}
   </tbody>
 </table>
+<script>
+  const fileInput = document.querySelector(".file-input");
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector(".file-name");
+      fileName.textContent = fileInput.files[0].name;
+    }
+  };
+</script>
