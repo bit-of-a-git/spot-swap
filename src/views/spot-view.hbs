@@ -1,18 +1,24 @@
 {{> welcome-menu active="spots"}}
-<div class="field">
-  <label class="label">Filter by Category</label>
-  <div class="select">
-    <select id="categoryFilter" required>
-      <option value="" selected>All Categories</option>
-      {{#each categories }}
-        <option value="{{this._id}}">{{this.name}}</option>
-      {{/each}}
-    </select>
+<div class="columns">
+  <div class="column is-one-fifth">
+    <div class="field">
+      <label class="label">Filter by County</label>
+      {{> counties-selector}}
+    </div>
   </div>
-</div>
-<div class="field">
-  <label class="label">Filter by County</label>
-  {{> counties-selector}}
+  <div class="column is-one-fifth">
+    <div class="field">
+      <label class="label">Filter by Category</label>
+      <div class="select">
+        <select id="categoryFilter" required>
+          <option value="" selected>All Categories</option>
+          {{#each categories }}
+            <option value="{{this._id}}">{{this.name}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+  </div>
 </div>
 <div id="spotsContainer">
   {{#if spots.length }}
@@ -20,17 +26,27 @@
       <section class="section">
         <div class="title">{{name}}</div>
         <div class="column">{{description}}</div>
-        <div class="column">Lat: {{latitude}}</div>
-        <div class="column">Long: {{longitude}}</div>
-      </section>
-    {{/each}}
-  {{else}}
-    <section class="section">
-      <div class="title">No Spots in Category</div>
-    </section>
-  {{/if}}
-</div>
-<script>
+        {{#if img }}
+          <div class="columns">
+            <div class="column is-half">{{>map}}</div>
+            <div class="column is-half">
+              <div class="card-image">
+                <figure class="image is-256x256">
+                  <img src={{img}}>
+                </div>
+              </div>
+            {{else}}
+              {{>map}}
+            {{/if}}
+          </section>
+        {{/each}}
+      {{else}}
+        <section class="section">
+          <div class="title">No Spots in Category</div>
+        </section>
+      {{/if}}
+    </div>
+    <script>
   document.getElementById("categoryFilter").addEventListener("change", updateSpots);
   document.getElementById("countyFilter").addEventListener("change", updateSpots);
 
@@ -59,5 +75,26 @@
     const doc = parser.parseFromString(html, "text/html");
     const newSpotsContainer = doc.getElementById("spotsContainer");
     document.getElementById("spotsContainer").innerHTML = newSpotsContainer.innerHTML;
+    initializeMaps();
   }
-</script>
+
+  function initializeMaps() {
+    document.querySelectorAll('[id^="map-"]').forEach((mapElement, index) => {
+      const name = mapElement.getAttribute('name');
+      const latitude = mapElement.getAttribute('latitude');
+      const longitude = mapElement.getAttribute('longitude');
+
+      let map = L.map(mapElement.id).setView([latitude, longitude], 13);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        minZoom: 2,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
+
+      let marker = L.marker([latitude, longitude]).addTo(map);
+      marker.bindPopup(`<b>${name}</b><br>Lat: ${latitude}, Long: ${longitude}`);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initializeMaps);
+    </script>
