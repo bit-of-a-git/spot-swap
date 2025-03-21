@@ -11,7 +11,7 @@
 }
 
 /* https://stackoverflow.com/questions/5110249/wildcard-in-css-for-classes */
-[id^="map-"] {
+[id^="map"] {
   position: sticky;
   height: 50vh;
 }

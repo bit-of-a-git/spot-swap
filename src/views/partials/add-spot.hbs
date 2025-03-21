@@ -68,10 +68,37 @@
       </div>
     </div>
   </div>
+  <div class="columns">
+    <div class="column">
+      <div id="map"></div>
+    </div>
+  </div>
   <button class="button is-primary">Add Spot</button>
 </form>
 <script>
-  // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
+  // Initialise the map centered on Galway
+  const map = L.map('map').setView([53.275137, -9.049262], 12);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    minZoom: 2,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  let marker;
+
+  // Function to update marker and input fields
+  function updateMarkerAndInputs(lat, lng) {
+    if (marker) {
+      map.removeLayer(marker);
+    }
+    marker = L.marker([lat, lng]).addTo(map);
+    map.setView([lat, lng], 13);
+    marker.bindPopup(`<b>Your Location</b><br>Lat: ${lat}, Long: ${lng}`).openPopup();
+    document.querySelector("#latitude").value = lat;
+    document.querySelector("#longitude").value = lng;
+  }
+
+  // Geolocation function
   function geoFindMe() {
     const status = document.querySelector("#geo-status");
     const latitudeInput = document.querySelector("#latitude");
@@ -83,9 +110,8 @@
 
       status.textContent = "";
 
-      // Update the input fields
-      latitudeInput.value = latitude;
-      longitudeInput.value = longitude;
+      // Update the input fields and marker
+      updateMarkerAndInputs(latitude, longitude);
     }
 
     function error() {
@@ -100,5 +126,13 @@
     }
   }
 
+  // Event listener for the "Use my current location" button. Runs the geoFindMe function when clicked
   document.querySelector("#find-me").addEventListener("click", geoFindMe);
+
+  // Event listener for map clicks. Updates the marker and input fields with the clicked location
+  map.on('click', function(e) {
+    const lat = e.latlng.lat.toFixed(6);
+    const lng = e.latlng.lng.toFixed(6);
+    updateMarkerAndInputs(lat, lng);
+  });
 </script>

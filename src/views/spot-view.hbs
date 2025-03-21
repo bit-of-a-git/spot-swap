@@ -33,20 +33,22 @@
               <div class="card-image">
                 <figure class="image is-256x256">
                   <img src={{img}}>
-                </div>
+                </figure>
               </div>
-            {{else}}
-              {{>map}}
-            {{/if}}
-          </section>
-        {{/each}}
-      {{else}}
-        <section class="section">
-          <div class="title">No Spots in Category</div>
-        </section>
-      {{/if}}
-    </div>
-    <script>
+            </div>
+          </div>
+        {{else}}
+          {{>map}}
+        {{/if}}
+      </section>
+    {{/each}}
+  {{else}}
+    <section class="section">
+      <div class="title">No Spots in Category</div>
+    </section>
+  {{/if}}
+</div>
+<script>
   document.getElementById("categoryFilter").addEventListener("change", updateSpots);
   document.getElementById("countyFilter").addEventListener("change", updateSpots);
 
@@ -75,10 +77,10 @@
     const doc = parser.parseFromString(html, "text/html");
     const newSpotsContainer = doc.getElementById("spotsContainer");
     document.getElementById("spotsContainer").innerHTML = newSpotsContainer.innerHTML;
-    initializeMaps();
+    initialiseMaps();
   }
 
-  function initializeMaps() {
+  function initialiseMaps() {
     document.querySelectorAll('[id^="map-"]').forEach((mapElement, index) => {
       const name = mapElement.getAttribute('name');
       const latitude = mapElement.getAttribute('latitude');
@@ -96,5 +98,5 @@
     });
   }
 
-  document.addEventListener("DOMContentLoaded", initializeMaps);
-    </script>
+  document.addEventListener("DOMContentLoaded", initialiseMaps);
+</script>
