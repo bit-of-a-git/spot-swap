@@ -2,12 +2,14 @@
       action="/collection/{{collection._id}}/addspot"
       method="POST">
   <label>Enter Spot Details:</label>
-  <div class="field is-horizontal">
-    <div class="field-body">
+  <div class="columns">
+    <div class="column is-one-third">
       <div class="field">
         <label class="label">Name</label>
         <input class="input" type="text" placeholder="Enter Name" name="name">
       </div>
+    </div>
+    <div class="column is-one-third">
       <div class="field">
         <label class="label">Description</label>
         <input class="input"
@@ -15,28 +17,8 @@
                placeholder="Enter Description"
                name="description">
       </div>
-      <div class="field">
-        <label class="label">Latitude</label>
-        <input class="input"
-               type="number"
-               placeholder="00.00"
-               name="latitude"
-               step="0.000001"
-               min="-90"
-               max="90"
-               required>
-      </div>
-      <div class="field">
-        <label class="label">Longitude</label>
-        <input class="input"
-               type="number"
-               placeholder="00.00"
-               name="longitude"
-               step="0.000001"
-               min="-180"
-               max="180"
-               required>
-      </div>
+    </div>
+    <div class="column is-one-third">
       <div class="field">
         <label class="label">Category</label>
         <div class="select">
@@ -50,5 +32,73 @@
       </div>
     </div>
   </div>
+  <div class="columns">
+    <div class="column is-one-third">
+      <div class="field">
+        <label class="label">Latitude</label>
+        <input class="input"
+               id="latitude"
+               type="number"
+               placeholder="00.00"
+               name="latitude"
+               step="0.000001"
+               min="-90"
+               max="90"
+               required>
+      </div>
+    </div>
+    <div class="column is-one-third">
+      <div class="field">
+        <label class="label">Longitude</label>
+        <input class="input"
+               id="longitude"
+               type="number"
+               placeholder="00.00"
+               name="longitude"
+               step="0.000001"
+               min="-180"
+               max="180"
+               required>
+      </div>
+    </div>
+    <div class="column is-one-third align-bottom">
+      <div class="field">
+        <p id="geo-status"></p>
+        <button id="find-me" type="button" class="button is-info">Use my current location</button>
+      </div>
+    </div>
+  </div>
   <button class="button is-primary">Add Spot</button>
 </form>
+<script>
+  // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
+  function geoFindMe() {
+    const status = document.querySelector("#geo-status");
+    const latitudeInput = document.querySelector("#latitude");
+    const longitudeInput = document.querySelector("#longitude");
+
+    function success(position) {
+      const latitude = position.coords.latitude.toFixed(6);
+      const longitude = position.coords.longitude.toFixed(6);
+
+      status.textContent = "";
+
+      // Update the input fields
+      latitudeInput.value = latitude;
+      longitudeInput.value = longitude;
+    }
+
+    function error() {
+      status.textContent = "Unable to retrieve your location";
+    }
+
+    if (!navigator.geolocation) {
+      status.textContent = "Geolocation is not supported by your browser";
+    } else {
+      status.textContent = "Locating…";
+      navigator.geolocation.getCurrentPosition(success, error);
+    }
+  }
+
+  document.querySelector("#find-me").addEventListener("click", geoFindMe);
+</script>
