@@ -63,6 +63,7 @@ export const SpotArraySpec = Joi.array().items(SpotSpecPlus).label("SpotArray");
 export const CollectionSpec = Joi.object()
   .keys({
     title: Joi.string().required().example("Historical spots in Galway"),
+    county: Joi.string().required().example("Galway"),
     userId: IdSpec,
     spots: SpotArraySpec,
   })
