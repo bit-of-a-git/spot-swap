@@ -64,14 +64,14 @@ export const CollectionSpec = Joi.object()
   .keys({
     title: Joi.string().required().example("Historical spots in Galway"),
     county: Joi.string().required().example("Galway"),
-    userId: IdSpec,
-    spots: SpotArraySpec,
   })
   .label("Collection");
 
 export const CollectionSpecPlus = CollectionSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
+  userId: IdSpec,
+  spots: SpotArraySpec.optional(),
 }).label("CollectionPlus");
 
 export const CollectionArraySpec = Joi.array().items(CollectionSpecPlus).label("CollectionArray");

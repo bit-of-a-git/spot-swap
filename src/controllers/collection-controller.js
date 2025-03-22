@@ -36,8 +36,9 @@ export const collectionController = {
         description: request.payload.description,
         latitude: request.payload.latitude,
         longitude: request.payload.longitude,
+        categoryId: category._id,
       };
-      await db.spotStore.addSpot(collection._id, category._id, newSpot);
+      await db.spotStore.addSpot(collection._id, newSpot);
       return h.redirect(`/collection/${collection._id}`);
     },
   },
