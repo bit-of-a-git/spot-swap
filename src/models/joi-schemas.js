@@ -12,12 +12,12 @@ export const UserCredentialsSpec = Joi.object()
 export const UserSpec = UserCredentialsSpec.keys({
   firstName: Joi.string().example("Homer").required(),
   lastName: Joi.string().example("Simpson").required(),
-  role: Joi.string().valid("admin", "user").required(),
 }).label("User");
 
 export const UserSpecPlus = UserSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
+  role: Joi.string().valid("admin", "user").required(),
 }).label("UserPlus");
 
 export const UserArraySpec = Joi.array().items(UserSpecPlus).label("UserArray");
@@ -63,6 +63,7 @@ export const SpotArraySpec = Joi.array().items(SpotSpecPlus).label("SpotArray");
 export const CollectionSpec = Joi.object()
   .keys({
     title: Joi.string().required().example("Historical spots in Galway"),
+    county: Joi.string().required().example("Galway"),
     userId: IdSpec,
     spots: SpotArraySpec,
   })

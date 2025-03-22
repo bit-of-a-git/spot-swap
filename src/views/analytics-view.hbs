@@ -1,0 +1,25 @@
+{{> admin-menu active="analytics"}}
+<section class="section">
+  <div class="container">
+    <h1 class="title">{{title}}</h1>
+    <div class="content">
+      <div class="title is-4">Overview</div>
+      <div class="box">
+        <p>Total Users: {{totalUsersNum}}</p>
+        <p>Total Collections: {{totalCollectionsNum}}</p>
+        <p>Total Spots: {{totalSpotsNum}}</p>
+        <p>Average Spots per Collection: {{averageSpotsPerCollection}}</p>
+      </div>
+      <h2 class="title is-4">Top User</h2>
+      <div class="box">
+        <p>User with Most Spots: {{userWithMostSpots.user.firstName}} {{userWithMostSpots.user.lastName}}</p>
+        <p>Number of Spots: {{userWithMostSpots.spotsCount}}</p>
+      </div>
+      <h2 class="title is-4">Top Collection</h2>
+      <div class="box">
+        <p>Collection with Most Spots: {{collectionWithMostSpots.collection.title}}</p>
+        <p>Number of Spots: {{collectionWithMostSpots.spotsCount}}</p>
+      </div>
+    </div>
+  </div>
+</section>

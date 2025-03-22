@@ -12,6 +12,7 @@ export const collectionController = {
         title: "Collection",
         collection: collection,
         categories: categories,
+        titleLink: "/dashboard",
       };
       return h.view("collection-view", viewData);
     },

@@ -1,5 +1,6 @@
 import Mongoose from "mongoose";
 import { User } from "./user.js";
+import { db } from "../db.js";
 
 export const userMongoStore = {
   async getAllUsers() {
@@ -29,6 +30,7 @@ export const userMongoStore = {
 
   async deleteUserById(id) {
     try {
+      await db.collectionStore.deleteCollectionsByUserId(id);
       await User.deleteOne({ _id: id });
     } catch (error) {
       console.log("bad id");

@@ -32,7 +32,16 @@ export const collectionMongoStore = {
 
   async deleteCollectionById(id) {
     try {
+      await spotMongoStore.deleteSpotsByCollectionId(id);
       await Collection.deleteOne({ _id: id });
+    } catch (error) {
+      console.log("bad id");
+    }
+  },
+
+  async deleteCollectionsByUserId(id) {
+    try {
+      await Collection.deleteMany({ userId: id });
     } catch (error) {
       console.log("bad id");
     }

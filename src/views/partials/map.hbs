@@ -1,0 +1,18 @@
+<div class="box"
+     id="map-{{@index}}"
+     name="{{name}}"
+     latitude="{{latitude}}"
+     longitude="{{longitude}}"></div>
+<script>
+  (function() {
+    let map = L.map('map-{{@index}}').setView([{{latitude}}, {{longitude}}], 12);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      minZoom: 2,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+    let marker = L.marker([{{latitude}}, {{longitude}}]).addTo(map);
+    marker.bindPopup(`<b>{{name}}</b><br>Lat: {{latitude}}, Long: {{longitude}}`);
+  })();
+</script>

@@ -26,6 +26,20 @@ export const spotMongoStore = {
     return spots;
   },
 
+  async getSpotsByCounty(county) {
+    const collections = await Collection.find({ county: county }).lean();
+    const collectionIds = collections.map((collection) => collection._id);
+    const spots = await Spot.find({ collectionId: { $in: collectionIds } }).lean();
+    return spots;
+  },
+
+  async getSpotsByCategoryAndCounty(categoryId, county) {
+    const collections = await Collection.find({ county: county }).lean();
+    const collectionIds = collections.map((collection) => collection._id);
+    const spots = await Spot.find({ collectionId: { $in: collectionIds }, categoryId: categoryId }).lean();
+    return spots;
+  },
+
   async getSpotById(id) {
     if (Mongoose.isValidObjectId(id)) {
       const spot = await Spot.findOne({ _id: id }).lean();
@@ -42,16 +56,25 @@ export const spotMongoStore = {
     }
   },
 
+  async deleteSpotsByCollectionId(collectionId) {
+    try {
+      await Spot.deleteMany({ collectionId: collectionId });
+    } catch (error) {
+      console.log("bad collection id");
+    }
+  },
+
   async deleteAllSpots() {
     await Spot.deleteMany({});
   },
 
-  async updateSpot(spot, updatedSpot) {
-    const spotDoc = await Spot.findOne({ _id: spot._id });
+  async updateSpot(updatedSpot) {
+    const spotDoc = await Spot.findOne({ _id: updatedSpot._id });
     spotDoc.name = updatedSpot.name;
     spotDoc.description = updatedSpot.description;
     spotDoc.latitude = updatedSpot.latitude;
     spotDoc.longitude = updatedSpot.longitude;
+    spotDoc.img = updatedSpot.img;
     await spotDoc.save();
   },
 };
