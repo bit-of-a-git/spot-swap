@@ -1,69 +1,60 @@
-<div class="subtitle">List of Spots</div>
-<table class="table is-fullwidth">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Latitude</th>
-      <th>Longitude</th>
-      <th>Image</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each collection.spots }}
-      <tr>
-        <td>{{name}}</td>
-        <td>{{description}}</td>
-        <td>{{latitude}}</td>
-        <td>{{longitude}}</td>
-        <td>
-          <div class="card">
-            {{#if img }}
+{{#if collection.spots.length }}
+  {{#each collection.spots }}
+    <div class="box has-background-black-ter has-text-white-ter">
+      <section class="section">
+        <div class="title has-text-white-ter">{{name}}</div>
+        <div class="column">{{description}}</div>
+        {{#if img }}
+          <div class="columns">
+            <div class="column is-half">{{>map}}</div>
+            <div class="column is-half">
               <div class="card-image">
                 <figure class="image is-256x256">
                   <img src={{img}}>
                   <a href="/collection/{{../collection._id}}/deletespotimage/{{_id}}"
-                     class="button">
+                     class="button is-danger image-deletion-button">
                     <i class="fas fa-trash"></i>
                   </a>
                 </figure>
               </div>
-            {{/if}}
-            <div class="card-content">
-              <form action="/collection/{{../collection._id}}/uploadspotimage/{{_id}}"
-                    method="POST"
-                    enctype="multipart/form-data">
-                <div id="file-select" class="file has-name is-fullwidth">
-                  <label class="file-label">
-                    <input class="file-input"
-                           name="imagefile"
-                           type="file"
-                           name="resume"
-                           accept="image/png, image/jpeg">
-                    <span class="file-cta">
-                      <span class="file-icon">
-                        <i class="fas fa-upload"></i>
-                      </span>
-                      <span class="file-label">Choose a file…</span>
-                    </span>
-                    <span class="file-name"></span>
-                  </label>
-                  <button type="submit" class="button is-info">Upload</button>
-                </div>
-              </form>
             </div>
           </div>
-        </td>
-        <td>
-          <a href="/collection/{{../collection._id}}/deletespot/{{_id}}"
-             class="ui icon button is-danger"
-             title="Delete Spot">
-            <i class="fas fa-trash"></i>
-          </a>
-        </td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+        {{else}}
+          {{>map}}
+          <div class="card-content">
+            <div class="subtitle has-text-white-ter">Upload Image</div>
+            <form action="/collection/{{../collection._id}}/uploadspotimage/{{_id}}"
+                  method="POST"
+                  enctype="multipart/form-data">
+              <div id="file-select" class="file has-name is-fullwidth">
+                <label class="file-label">
+                  <input class="file-input"
+                         name="imagefile"
+                         type="file"
+                         name="resume"
+                         accept="image/png, image/jpeg">
+                  <span class="file-cta">
+                    <span class="file-icon">
+                      <i class="fas fa-upload"></i>
+                    </span>
+                    <span class="file-label">Choose a file…</span>
+                  </span>
+                  <span class="file-name"></span>
+                </label>
+                <button type="submit" class="button is-info">Upload</button>
+              </div>
+            </form>
+          </div>
+        {{/if}}
+        <a href="/collection/{{../collection._id}}/deletespot/{{ _id }}"
+           class="ui icon button is-danger is-pulled-right"
+           title="Delete Spot">
+          <i class="fas fa-trash"></i>
+        </a>
+      </section>
+    </div>
+  {{/each}}
+{{else}}
+  <div class="title has-text-white-ter">No Spots</div>
+{{/if}}
 {{>file-input-script}}

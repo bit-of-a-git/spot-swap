@@ -1,52 +1,52 @@
 {{> welcome-menu active="spots"}}
-<div class="columns">
-  <div class="column is-one-fifth">
-    <div class="field">
-      <label class="label">Filter by County</label>
-      {{> counties-selector}}
+<div class="box has-background-black-ter has-text-white-ter">
+  <div class="columns">
+    <div class="column is-one-fifth">
+      <div class="field">
+        <label class="label has-text-white-ter">Filter by County</label>
+        {{> counties-selector}}
+      </div>
     </div>
-  </div>
-  <div class="column is-one-fifth">
-    <div class="field">
-      <label class="label">Filter by Category</label>
-      <div class="select">
-        <select id="categoryFilter" required>
-          <option value="" selected>All Categories</option>
-          {{#each categories }}
-            <option value="{{this._id}}">{{this.name}}</option>
-          {{/each}}
-        </select>
+    <div class="column is-one-fifth">
+      <div class="field">
+        <label class="label has-text-white-ter">Filter by Category</label>
+        <div class="select">
+          <select id="categoryFilter" required>
+            <option value="" selected>All Categories</option>
+            {{#each categories }}
+              <option value="{{this._id}}">{{this.name}}</option>
+            {{/each}}
+          </select>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div id="spotsContainer">
-  {{#if spots.length }}
-    {{#each spots }}
-      <section class="section">
-        <div class="title">{{name}}</div>
-        <div class="column">{{description}}</div>
-        {{#if img }}
-          <div class="columns">
-            <div class="column is-half">{{>map}}</div>
-            <div class="column is-half">
-              <div class="card-image">
-                <figure class="image is-256x256">
-                  <img src={{img}}>
-                </figure>
+  <div id="spotsContainer">
+    {{#if spots.length }}
+      {{#each spots }}
+        <section class="section">
+          <div class="title has-text-white-ter">{{name}}</div>
+          <div class="column">{{description}}</div>
+          {{#if img }}
+            <div class="columns">
+              <div class="column is-half">{{>map}}</div>
+              <div class="column is-half">
+                <div class="card-image">
+                  <figure class="image is-256x256">
+                    <img src={{img}}>
+                  </figure>
+                </div>
               </div>
             </div>
-          </div>
-        {{else}}
-          {{>map}}
-        {{/if}}
-      </section>
-    {{/each}}
-  {{else}}
-    <section class="section">
-      <div class="title">No Spots in Category</div>
-    </section>
-  {{/if}}
+          {{else}}
+            {{>map}}
+          {{/if}}
+        </section>
+      {{/each}}
+    {{else}}
+      <div class="title has-text-white-ter">No Spots in Category</div>
+    {{/if}}
+  </div>
 </div>
 <script>
   document.getElementById("categoryFilter").addEventListener("change", updateSpots);

@@ -1,25 +1,34 @@
 {{> admin-menu active="analytics"}}
-<section class="section">
-  <div class="container">
-    <h1 class="title">{{title}}</h1>
-    <div class="content">
-      <div class="title is-4">Overview</div>
-      <div class="box">
-        <p>Total Users: {{totalUsersNum}}</p>
-        <p>Total Collections: {{totalCollectionsNum}}</p>
-        <p>Total Spots: {{totalSpotsNum}}</p>
-        <p>Average Spots per Collection: {{averageSpotsPerCollection}}</p>
-      </div>
-      <h2 class="title is-4">Top User</h2>
-      <div class="box">
-        <p>User with Most Spots: {{userWithMostSpots.user.firstName}} {{userWithMostSpots.user.lastName}}</p>
-        <p>Number of Spots: {{userWithMostSpots.spotsCount}}</p>
-      </div>
-      <h2 class="title is-4">Top Collection</h2>
-      <div class="box">
-        <p>Collection with Most Spots: {{collectionWithMostSpots.collection.title}}</p>
-        <p>Number of Spots: {{collectionWithMostSpots.spotsCount}}</p>
-      </div>
-    </div>
+<div class="title has-text-white-ter has-text-weight-semibold">Overview</div>
+<div class="box has-background-black-ter">
+  <div class="columns has-text-white-ter">
+    <div class="column is-one-fourth has-text-weight-semibold">Total Users:</div>
+    <div class="column is-one-fourth">{{totalUsersNum}}</div>
+    <div class="column is-one-fourth has-text-weight-semibold">Total Spots:</div>
+    <div class="column is-one-fourth">{{totalSpotsNum}}</div>
   </div>
-</section>
+  <div class="columns has-text-white-ter">
+    <div class="column is-one-fourth has-text-weight-semibold">Total Collections:</div>
+    <div class="column is-one-fourth">{{totalCollectionsNum}}</div>
+    <div class="column is-one-fourth has-text-weight-semibold">Average Spots per Collection:</div>
+    <div class="column is-one-fourth">{{averageSpotsPerCollection}}</div>
+  </div>
+</div>
+<h2 class="title has-text-white-ter has-text-weight-semibold">Users</h2>
+<div class="box has-background-black-ter">
+  <div class="columns has-text-white-ter">
+    <div class="column is-one-fourth has-text-weight-semibold">Most Active:</div>
+    <div class="column is-one-fourth">{{userWithMostSpots.user.firstName}} {{userWithMostSpots.user.lastName}}</div>
+    <div class="column is-one-fourth has-text-weight-semibold">Number of Spots:</div>
+    <div class="column is-one-fourth">{{userWithMostSpots.spotsCount}}</div>
+  </div>
+</div>
+<h2 class="title has-text-white-ter has-text-weight-semibold">Top Collection</h2>
+<div class="box has-background-black-ter">
+  <div class="columns has-text-white-ter">
+    <div class="column is-one-fourth has-text-weight-semibold">Largest:</div>
+    <div class="column is-one-fourth">{{collectionWithMostSpots.collection.title}}</div>
+    <div class="column is-one-fourth has-text-weight-semibold">Number of Spots:</div>
+    <div class="column is-one-fourth">{{collectionWithMostSpots.spotsCount}}</div>
+  </div>
+</div>
