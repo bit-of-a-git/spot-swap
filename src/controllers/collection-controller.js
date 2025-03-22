@@ -49,48 +49,4 @@ export const collectionController = {
       return h.redirect(`/collection/${collection._id}`);
     },
   },
-
-  uploadImage: {
-    handler: async function (request, h) {
-      try {
-        const collection = await db.collectionStore.getCollectionById(request.params.id);
-        const file = request.payload.imagefile;
-        if (Object.keys(file).length > 0) {
-          const url = await imageStore.uploadImage(request.payload.imagefile);
-          collection.img = url;
-          await db.collectionStore.updateCollection(collection);
-        }
-        return h.redirect(`/collection/${collection._id}`);
-      } catch (err) {
-        console.log(err);
-        return h.redirect(`/collection/${collection._id}`);
-      }
-    },
-    payload: {
-      multipart: true,
-      output: "data",
-      maxBytes: 209715200,
-      parse: true,
-    },
-  },
-
-  deleteImage: {
-    handler: async function (request, h) {
-      try {
-        const collection = await db.collectionStore.getCollectionById(request.params.id);
-        if (collection.img) {
-          const url = new URL(collection.img);
-          const pathSegments = url.pathname.split("/");
-          const publicId = pathSegments[pathSegments.length - 1].split(".")[0];
-          await imageStore.deleteImage(publicId);
-          delete collection.img;
-          await db.collectionStore.updateCollection(collection);
-        }
-        return h.redirect(`/collection/${collection._id}`);
-      } catch (err) {
-        console.log(err);
-        return h.redirect(`/collection/${collection._id}`);
-      }
-    },
-  },
 };

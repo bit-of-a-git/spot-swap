@@ -36,31 +36,26 @@ export const seedData = {
       title: "Best views in Sligo",
       userId: "->users.bart",
       county: "Sligo",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633135/4f66592b13e349c6b7c897b067312ea1_vbsyqq.jpg",
     },
     cong: {
       title: "Quiet Man spots in Cong",
       userId: "->users.marge",
       county: "Mayo",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633166/header-cong-county-mayo_rzb7l5.jpg",
     },
     belfast: {
       title: "Titanic locations in Belfast",
       userId: "->users.homer",
       county: "Antrim",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633215/146164-Belfast-City-Hall_l23spr.jpg",
     },
     galway: {
       title: "Underrated places in Galway",
       userId: "->users.bart",
       county: "Galway",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633248/2Fmethode_2Ftimes_2Fprod_2Fweb_2Fbin_2F6e73edc4-3f15-11e8-b6d1-2c479ec10e4b_emv3nx.jpg",
     },
     cork: {
       title: "Best pubs in Cork",
       userId: "->users.marge",
       county: "Cork",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633302/Cork-City-scaled_h2atxe.jpg",
     },
   },
   categories: {
