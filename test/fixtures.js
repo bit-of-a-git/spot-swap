@@ -35,6 +35,7 @@ export const testUsers = [
 
 export const galway = {
   title: "Best pubs in Galway",
+  county: "Galway",
 };
 
 export const derry = {
@@ -44,14 +45,33 @@ export const derry = {
 export const testCollections = [
   {
     title: "Great places to eat in Cork",
+    county: "Cork",
   },
   {
     title: "Street art in Waterford",
+    county: "Waterford",
   },
   {
     title: "Historic places in Dublin",
+    county: "Dublin",
   },
 ];
+
+export const testCategories = [
+  {
+    name: "History",
+  },
+  {
+    name: "Street Art",
+  },
+  {
+    name: "Nature",
+  },
+];
+
+export const foodCategory = {
+  name: "Food and Drink",
+};
 
 export const crane = {
   name: "The Crane Bar",
