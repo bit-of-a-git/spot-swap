@@ -24,4 +24,8 @@ export const categoryMongoStore = {
     const categoryObj = await newCategory.save();
     return this.getCategoryById(categoryObj._id);
   },
+
+  async deleteAllCategories() {
+    await Category.deleteMany({});
+  },
 };
