@@ -23,8 +23,6 @@ export const webRoutes = [
   { method: "GET", path: "/collection/{id}", config: collectionController.index },
   { method: "POST", path: "/collection/{id}/addspot", config: collectionController.addSpot },
   { method: "GET", path: "/collection/{id}/deletespot/{spotid}", config: collectionController.deleteSpot },
-  { method: "POST", path: "/collection/{id}/uploadimage", config: collectionController.uploadImage },
-  { method: "GET", path: "/collection/{id}/deleteimage", config: collectionController.deleteImage },
 
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
 

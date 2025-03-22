@@ -54,7 +54,6 @@ export const collectionMongoStore = {
   async updateCollection(updatedCollection) {
     const collections = await Collection.findOne({ _id: updatedCollection._id });
     collections.title = updatedCollection.title;
-    collections.img = updatedCollection.img;
     await collections.save();
   },
 };

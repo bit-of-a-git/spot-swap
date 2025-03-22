@@ -1,7 +1,9 @@
 {{#each collections }}
   <div class="box box-link-hover-shadow">
     <h2 class="title">{{title}}</h2>
-    <a href="/collection/{{_id}}" class="ui icon button is-link">
+    <a href="/collection/{{_id}}"
+       class="ui icon button is-link"
+       title="Open Collection">
       <i class="fas fa-folder-open"></i>
     </a>
     <a href="/dashboard/deletecollection/{{_id}}"
@@ -9,6 +11,5 @@
        title="Delete Collection">
       <i class="fas fa-trash"></i>
     </a>
-    <div class="column">{{> collection-image }}</div>
   </div>
 {{/each}}
