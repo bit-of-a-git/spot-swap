@@ -7,6 +7,11 @@ export const apiRoutes = [
   { method: "POST", path: "/api/users", config: userApi.create },
   { method: "DELETE", path: "/api/users", config: userApi.deleteAll },
   { method: "GET", path: "/api/users/{id}", config: userApi.findOne },
+  { method: "POST", path: "/api/users/authenticate", config: userApi.authenticate },
+  { method: "DELETE", path: "/api/users/{id}", config: userApi.deleteOne },
+  { method: "PATCH", path: "/api/users/{id}/name", config: userApi.updateName },
+  { method: "PATCH", path: "/api/users/{id}/email", config: userApi.updateEmail },
+  { method: "PATCH", path: "/api/users/{id}/password", config: userApi.updatePassword },
 
   { method: "POST", path: "/api/collections", config: collectionApi.create },
   { method: "DELETE", path: "/api/collections", config: collectionApi.deleteAll },
@@ -19,6 +24,4 @@ export const apiRoutes = [
   { method: "POST", path: "/api/collections/{id}/spots", config: spotApi.create },
   { method: "DELETE", path: "/api/spots", config: spotApi.deleteAll },
   { method: "DELETE", path: "/api/spots/{id}", config: spotApi.deleteOne },
-
-  { method: "POST", path: "/api/users/authenticate", config: userApi.authenticate },
 ];

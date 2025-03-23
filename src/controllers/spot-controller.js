@@ -7,6 +7,7 @@ export const spotController = {
     auth: false,
     handler: async function (request, h) {
       let spots;
+      // Gets category and county from AJAX request, and filters spots accordingly
       const { category } = await request.query;
       const { county } = await request.query;
       if (category && county) {

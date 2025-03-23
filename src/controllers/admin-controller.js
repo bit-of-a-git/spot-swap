@@ -2,6 +2,7 @@ import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
 import { analytics } from "../utils/analytics.js";
 
+// Pre-handler function that checks if the user is an admin
 async function isAdmin(request, h) {
   const user = request.auth.credentials;
   if (user.role !== "admin") {
@@ -18,6 +19,7 @@ export const adminController = {
       const loggedInUser = request.auth.credentials;
       const viewData = {
         title: "Admin Console",
+        // Filters out the logged-in user from the list of users to prevent them from deleting themselves
         users: users.filter((user) => !user._id.equals(loggedInUser._id)),
         titleLink: "/admin",
       };

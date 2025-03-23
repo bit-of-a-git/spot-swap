@@ -33,9 +33,11 @@
   </div>
 </div>
 <script>
+  // Add event listeners to the category and county filters, call updateSpots when they change
   document.getElementById("categoryFilter").addEventListener("change", updateSpots);
   document.getElementById("countyFilter").addEventListener("change", updateSpots);
 
+  // Performs an AJAX request to update the spots displayed on the page
   async function updateSpots() {
     const selectedCategory = document.getElementById("categoryFilter").value;
     const selectedCounty = document.getElementById("countyFilter").value;
@@ -51,6 +53,7 @@
       url.searchParams.delete("county");
     }
 
+    // Fetch the updated spots and replace the spots container with the new content
     const response = await fetch(url.toString(), {
       headers: {
         "X-Requested-With": "XMLHttpRequest"
@@ -59,13 +62,16 @@
     const html = await response.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
+    // Replaces the spots container with the new content
     const newSpotsContainer = doc.getElementById("spotsContainer");
     document.getElementById("spotsContainer").innerHTML = newSpotsContainer.innerHTML;
     initialiseMaps();
   }
 
+  // Initialises the maps on the page for each spot
   function initialiseMaps() {
     document.querySelectorAll('[id^="map-"]').forEach((mapElement, index) => {
+      // Extract the name, latitude and longitude attributes from the map element
       const name = mapElement.getAttribute('name');
       const latitude = mapElement.getAttribute('latitude');
       const longitude = mapElement.getAttribute('longitude');
@@ -77,10 +83,12 @@
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       }).addTo(map);
 
+      // Adds a marker to the map with a popup containing the spot name and coordinates fetched from the map element
       let marker = L.marker([latitude, longitude]).addTo(map);
       marker.bindPopup(`<b>${name}</b><br>Lat: ${latitude}, Long: ${longitude}`);
     });
   }
 
+  // Initialises the maps when the page has loaded
   document.addEventListener("DOMContentLoaded", initialiseMaps);
 </script>
