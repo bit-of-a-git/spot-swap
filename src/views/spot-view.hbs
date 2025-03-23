@@ -1,18 +1,8 @@
 {{> welcome-menu active="spots"}}
 <div class="box has-background-black-ter has-text-white-ter">
   <div class="columns">
-    <div class="column is-one-fifth">
-      <div class="field">
-        <label class="label has-text-white-ter">Filter by County</label>
-        {{> counties-selector}}
-      </div>
-    </div>
-    <div class="column is-one-fifth">
-      <div class="field">
-        <label class="label has-text-white-ter">Filter by Category</label>
-        {{>categories-selector}}
-      </div>
-    </div>
+    <div class="column is-one-fifth">{{> counties-selector}}</div>
+    <div class="column is-one-fifth">{{>categories-selector}}</div>
   </div>
   <div id="spotsContainer">
     {{#if spots.length }}
