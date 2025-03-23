@@ -33,6 +33,7 @@
   </div>
 </div>
 <script>
+  // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
   // Add event listeners to the category and county filters, call updateSpots when they change
   document.getElementById("categoryFilter").addEventListener("change", updateSpots);
   document.getElementById("countyFilter").addEventListener("change", updateSpots);
@@ -55,9 +56,6 @@
 
     // Fetch the updated spots and replace the spots container with the new content
     const response = await fetch(url.toString(), {
-      headers: {
-        "X-Requested-With": "XMLHttpRequest"
-      }
     });
     const html = await response.text();
     const parser = new DOMParser();
