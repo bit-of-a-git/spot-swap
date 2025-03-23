@@ -5,10 +5,10 @@
 ## Table of Contents
 - [About the project](#about-the-project)
 - [Features](#features)
-- [Future plans](#future-plans)
-- [Getting started](#getting-started)
-- [Folder Structure](#folder-structure)
-- [Configuration](#configuration)
+- [Dependencies](#dependencies)
+- [Installing the project locally](#installing-the-project-locally)
+- [Remote Deployments](#remote-deployments)
+- [Using the app](#using-the-app)
 - [Credits](#credits)
 
 ## About the project
@@ -43,6 +43,13 @@ npm install
 npm start
 .
 ```
+
+## Remote Deployments
+
+This project has been deployed on both Glitch and Render.
+
+- https://rough-eminent-mailbox.glitch.me/
+- https://spot-swap.onrender.com
 
 ## Using the app
 

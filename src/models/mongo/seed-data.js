@@ -86,7 +86,7 @@ export const seedData = {
       longitude: -5.909918,
       collectionId: "->collections.belfast",
       category: "Historical Sites",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633469/Titanic_Belfast_HDR_fwpssc.jpg",
+      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742715569/Titanic_Belfast_HDR_fwpssc_ahyhp7.jpg",
     },
     spot_4: {
       name: "Connemara National Park",
@@ -95,7 +95,7 @@ export const seedData = {
       longitude: -9.8852,
       collectionId: "->collections.galway",
       category: "Nature & Outdoors",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633488/Connemara12Bens_cn1cii.jpg",
+      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742715610/Connemara12Bens_m6a0se.jpg",
     },
     spot_5: {
       name: "Pizza Point",
