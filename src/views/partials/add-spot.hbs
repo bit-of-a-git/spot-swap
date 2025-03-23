@@ -81,7 +81,7 @@
     }
     marker = L.marker([lat, lng]).addTo(map);
     map.setView([lat, lng], 13);
-    marker.bindPopup(`<b>Your Location</b><br>Lat: ${lat}, Long: ${lng}`).openPopup();
+    marker.bindPopup(`Lat: ${lat}, Long: ${lng}`).openPopup();
     document.querySelector("#latitude").value = lat;
     document.querySelector("#longitude").value = lng;
   }
