@@ -1,27 +1,32 @@
-<table class="table is-fullwidth">
-  <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Second Name</th>
-      <th>Email</th>
-      <th>Password</th>
-      <th>Account Type</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each users }}
+<div class="box has-background-black-ter">
+  <div class="title has-text-white-ter">User Overview</div>
+  <table class="table is-fullwidth has-background-black-ter has-text-white-ter">
+    <thead>
       <tr>
-        <td>{{firstName}}</td>
-        <td>{{lastName}}</td>
-        <td>{{email}}</td>
-        <td>{{password}}</td>
-        <td>{{role}}</td>
-        <td>
-          <a href="/deleteuser/{{_id}}" class="ui icon button">
-            <i class="fas fa-trash"></i>
-          </a>
-        </td>
+        <th class="has-text-white-ter">First Name</th>
+        <th class="has-text-white-ter">Second Name</th>
+        <th class="has-text-white-ter">Email</th>
+        <th class="has-text-white-ter">Password</th>
+        <th class="has-text-white-ter">Account Type</th>
       </tr>
-    {{/each}}
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      {{#each users }}
+        <tr>
+          <td>{{firstName}}</td>
+          <td>{{lastName}}</td>
+          <td>{{email}}</td>
+          <td>{{password}}</td>
+          <td>{{role}}</td>
+          <td>
+            <a href="/deleteuser/{{_id}}"
+               class="ui icon button is-danger"
+               title="Delete User">
+              <i class="fas fa-trash"></i>
+            </a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

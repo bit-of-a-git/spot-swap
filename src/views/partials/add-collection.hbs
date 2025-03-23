@@ -1,10 +1,18 @@
-<form action="/dashboard/addcollection" method="POST">
-  <div class="field">
-    <label class="label">Collection Name</label>
-    <input class="input"
-           type="text"
-           placeholder="Enter collection name"
-           name="title">
+<form class="box has-background-black-ter"
+      action="/dashboard/addcollection"
+      method="POST">
+  <div class="title is-4 has-text-white-ter">Add Collection</div>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <label class="label has-text-white-ter">Collection Name</label>
+        <input class="input"
+               type="text"
+               placeholder="Enter collection name"
+               name="title">
+      </div>
+      {{> counties-selector}}
+    </div>
   </div>
   <button class="button is-link">Add Collection</button>
 </form>

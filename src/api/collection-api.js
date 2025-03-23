@@ -2,6 +2,7 @@ import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
 import { CollectionArraySpec, IdSpec, CollectionSpecPlus, CollectionSpec } from "../models/joi-schemas.js";
 import { validationError } from "./logger.js";
+import { decodeToken, validate } from "./jwt-utils.js";
 
 export const collectionApi = {
   find: {
@@ -50,7 +51,14 @@ export const collectionApi = {
     },
     handler: async function (request, h) {
       try {
+        // https://github.com/ki321g/Rugby-Club-POI/blob/main/src/api/club-api.js
+        const decodedToken = decodeToken(request.headers.authorization);
+        const validationResult = await validate(decodedToken, request);
+        // if (!validationResult.credentials) {
+        //   return Boom.unauthorized("Invalid credentials");
+        // }
         const collection = request.payload;
+        collection.userId = decodedToken.userId;
         const newCollection = await db.collectionStore.addCollection(collection);
         if (newCollection) {
           return h.response(newCollection).code(201);

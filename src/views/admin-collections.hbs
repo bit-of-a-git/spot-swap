@@ -1,0 +1,5 @@
+{{> admin-menu active="collections"}}
+{{#each users }}
+  <div class="title has-text-white-ter has-text-weight-bold">{{firstName}} {{lastName}}'s Collections</div>
+  {{>list-collections}}
+{{/each}}

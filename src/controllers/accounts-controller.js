@@ -24,9 +24,18 @@ export const accountsController = {
       },
     },
     handler: async function (request, h) {
-      const user = request.payload;
-      await db.userStore.addUser(user);
-      return h.redirect("/");
+      const newUser = request.payload;
+      // Checks if there are any admin users in the database. If not, sets the first user to be an admin.
+      // https://github.com/ki321g/Rugby-Club-POI/blob/main/src/controllers/accounts-controller.js
+      const allUsers = await db.userStore.getAllUsers();
+      const adminUsers = allUsers.filter((user) => user.role === "admin");
+      if (adminUsers.length === 0) {
+        newUser.role = "admin";
+      } else {
+        newUser.role = "user";
+      }
+      await db.userStore.addUser(newUser);
+      return h.redirect("/login");
     },
   },
   showLogin: {
@@ -48,9 +57,13 @@ export const accountsController = {
       const { email, password } = request.payload;
       const user = await db.userStore.getUserByEmail(email);
       if (!user || user.password !== password) {
-        return h.redirect("/");
+        const errors = [{ message: "Invalid email or password" }];
+        return h.view("login-view", { title: "Log in error", errors: errors }).code(400);
       }
       request.cookieAuth.set({ id: user._id });
+      if (user.role === "admin") {
+        return h.redirect("/admin");
+      }
       return h.redirect("/dashboard");
     },
   },

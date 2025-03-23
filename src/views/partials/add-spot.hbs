@@ -1,23 +1,31 @@
-<form class="box"
+<form class="box has-background-black-ter"
       action="/collection/{{collection._id}}/addspot"
       method="POST">
-  <label>Enter Spot Details:</label>
-  <div class="field is-horizontal">
-    <div class="field-body">
+  <div class="title is-4 has-text-white-ter">Add Spot</div>
+  <div class="columns">
+    <div class="column is-one-third">
       <div class="field">
-        <label class="label">Name</label>
+        <label class="label has-text-white-ter">Name</label>
         <input class="input" type="text" placeholder="Enter Name" name="name">
       </div>
+    </div>
+    <div class="column is-one-third">
       <div class="field">
-        <label class="label">Description</label>
+        <label class="label has-text-white-ter">Description</label>
         <input class="input"
                type="text"
                placeholder="Enter Description"
                name="description">
       </div>
+    </div>
+    <div class="column is-one-third">{{>categories-selector}}</div>
+  </div>
+  <div class="columns">
+    <div class="column is-one-third">
       <div class="field">
-        <label class="label">Latitude</label>
+        <label class="label has-text-white-ter">Latitude</label>
         <input class="input"
+               id="latitude"
                type="number"
                placeholder="00.00"
                name="latitude"
@@ -26,9 +34,12 @@
                max="90"
                required>
       </div>
+    </div>
+    <div class="column is-one-third">
       <div class="field">
-        <label class="label">Longitude</label>
+        <label class="label has-text-white-ter">Longitude</label>
         <input class="input"
+               id="longitude"
                type="number"
                placeholder="00.00"
                name="longitude"
@@ -37,18 +48,79 @@
                max="180"
                required>
       </div>
+    </div>
+    <div class="column is-one-third align-bottom">
       <div class="field">
-        <label class="label">Category</label>
-        <div class="select">
-          <select name="category" required>
-            <option value="" disabled selected>Select a category</option>
-            {{#each categories }}
-              <option value="{{this._id}}">{{this.name}}</option>
-            {{/each}}
-          </select>
-        </div>
+        <p id="geo-status has-text-white-ter"></p>
+        <button id="find-me" type="button" class="button is-info">Use my current location</button>
       </div>
     </div>
   </div>
-  <button class="button is-primary">Add Track</button>
+  <div class="columns">
+    <div class="column">
+      <div id="map"></div>
+    </div>
+  </div>
+  <button class="button is-primary">Add</button>
 </form>
+<script>
+  // Initialise the map centered on Galway
+  const map = L.map('map').setView([53.275137, -9.049262], 12);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    minZoom: 2,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+
+  let marker;
+
+  // Function to update marker and input fields
+  function updateMarkerAndInputs(lat, lng) {
+    if (marker) {
+      map.removeLayer(marker);
+    }
+    marker = L.marker([lat, lng]).addTo(map);
+    map.setView([lat, lng], 13);
+    marker.bindPopup(`<b>Your Location</b><br>Lat: ${lat}, Long: ${lng}`).openPopup();
+    document.querySelector("#latitude").value = lat;
+    document.querySelector("#longitude").value = lng;
+  }
+
+  // Geolocation function
+  function geoFindMe() {
+    const status = document.querySelector("#geo-status");
+    const latitudeInput = document.querySelector("#latitude");
+    const longitudeInput = document.querySelector("#longitude");
+
+    function success(position) {
+      const latitude = position.coords.latitude.toFixed(6);
+      const longitude = position.coords.longitude.toFixed(6);
+
+      status.textContent = "";
+
+      // Update the input fields and marker
+      updateMarkerAndInputs(latitude, longitude);
+    }
+
+    function error() {
+      status.textContent = "Unable to retrieve your location";
+    }
+
+    if (!navigator.geolocation) {
+      status.textContent = "Geolocation is not supported by your browser";
+    } else {
+      status.textContent = "Locating…";
+      navigator.geolocation.getCurrentPosition(success, error);
+    }
+  }
+
+  // Event listener for the "Use my current location" button. Runs the geoFindMe function when clicked
+  document.querySelector("#find-me").addEventListener("click", geoFindMe);
+
+  // Event listener for map clicks. Updates the marker and input fields with the clicked location
+  map.on('click', function(e) {
+    const lat = e.latlng.lat.toFixed(6);
+    const lng = e.latlng.lng.toFixed(6);
+    updateMarkerAndInputs(lat, lng);
+  });
+</script>

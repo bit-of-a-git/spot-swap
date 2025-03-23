@@ -35,44 +35,27 @@ export const seedData = {
     sligo: {
       title: "Best views in Sligo",
       userId: "->users.bart",
+      county: "Sligo",
     },
     cong: {
       title: "Quiet Man spots in Cong",
       userId: "->users.marge",
+      county: "Mayo",
     },
     belfast: {
       title: "Titanic locations in Belfast",
       userId: "->users.homer",
+      county: "Antrim",
     },
-  },
-  categories: {
-    _model: "Category",
-    food: {
-      name: "Food & Drink",
+    galway: {
+      title: "Underrated places in Galway",
+      userId: "->users.bart",
+      county: "Galway",
     },
-    nature: {
-      name: "Nature & Outdoors",
-    },
-    history: {
-      name: "Historical Sites",
-    },
-    culture: {
-      name: "Art & Culture",
-    },
-    nightlife: {
-      name: "Nightlife & Entertainment",
-    },
-    shopping: {
-      name: "Shopping",
-    },
-    adventure: {
-      name: "Adventure & Sports",
-    },
-    relaxation: {
-      name: "Relaxation & Wellness",
-    },
-    unusual: {
-      name: "Unusual Experiences",
+    cork: {
+      title: "Best pubs in Cork",
+      userId: "->users.marge",
+      county: "Cork",
     },
   },
   spots: {
@@ -84,7 +67,8 @@ export const seedData = {
       latitude: 54.25326,
       longitude: -8.55774,
       collectionId: "->collections.sligo",
-      categoryId: "->categories.nature",
+      category: "Nature & Outdoors",
+      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633365/header-queen-maeve-county-sligo_xjhfou.jpg",
     },
     spot_2: {
       name: "Quiet Man Statue",
@@ -92,7 +76,8 @@ export const seedData = {
       latitude: 53.540515,
       longitude: -9.286646,
       collectionId: "->collections.cong",
-      categoryId: "->categories.culture",
+      category: "Art & Culture",
+      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633432/IMG_7364-001_cac4dp.jpg",
     },
     spot_3: {
       name: "Titanic Belfast",
@@ -100,7 +85,44 @@ export const seedData = {
       latitude: 54.60815,
       longitude: -5.909918,
       collectionId: "->collections.belfast",
-      categoryId: "->categories.history",
+      category: "Historical Sites",
+      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633469/Titanic_Belfast_HDR_fwpssc.jpg",
+    },
+    spot_4: {
+      name: "Connemara National Park",
+      description: "A national park in County Galway, western Ireland.",
+      latitude: 53.5486,
+      longitude: -9.8852,
+      collectionId: "->collections.galway",
+      category: "Nature & Outdoors",
+      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633488/Connemara12Bens_cn1cii.jpg",
+    },
+    spot_5: {
+      name: "Pizza Point",
+      description: "Great pizza, sold by the slice",
+      latitude: 53.272776,
+      longitude: -9.049986,
+      collectionId: "->collections.galway",
+      category: "Food & Drink",
+      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633831/pizza-point-1200x741-1_wqagys.jpg",
+    },
+    spot_6: {
+      name: "Circle of Life Commemorative Garden",
+      description: "A beautiful stone garden beside the sea in Salthill",
+      latitude: 53.25815,
+      longitude: -9.086178,
+      collectionId: "->collections.galway",
+      category: "Nature & Outdoors",
+      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742634055/CityParkCircleOfLife2-scaled_qf47z5.jpg",
+    },
+    spot_7: {
+      name: "Coughlan's",
+      description: "A traditional Irish pub in Cork, featuring live music.",
+      latitude: 51.898,
+      longitude: -8.472,
+      collectionId: "->collections.cork",
+      category: "Nightlife & Entertainment",
+      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633542/function-room-cork-coughlans-2_csrx9n.jpg",
     },
   },
 };

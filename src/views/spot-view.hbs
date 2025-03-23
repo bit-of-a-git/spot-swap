@@ -1,41 +1,59 @@
 {{> welcome-menu active="spots"}}
-<div class="field">
-  <label class="label">Filter by Category</label>
-  <div class="select">
-    <select id="categoryFilter" required>
-      <option value="" selected>All Categories</option>
-      {{#each categories }}
-        <option value="{{this._id}}">{{this.name}}</option>
+<div class="box has-background-black-ter has-text-white-ter">
+  <div class="columns">
+    <div class="column is-one-fifth">{{> counties-selector}}</div>
+    <div class="column is-one-fifth">{{>categories-selector}}</div>
+  </div>
+  <div id="spotsContainer">
+    {{#if spots.length }}
+      {{#each spots }}
+        <section class="section">
+          <div class="title has-text-white-ter">{{name}}</div>
+          <div class="subtitle is-6 has-text-warning">{{category}}</div>
+          <div class="column">{{description}}</div>
+          {{#if img }}
+            <div class="columns">
+              <div class="column is-half">{{>map}}</div>
+              <div class="column is-half">
+                <div class="card-image">
+                  <figure class="image is-256x256">
+                    <img src={{img}}>
+                  </figure>
+                </div>
+              </div>
+            </div>
+          {{else}}
+            {{>map}}
+          {{/if}}
+        </section>
       {{/each}}
-    </select>
+    {{else}}
+      <div class="title has-text-white-ter">No Spots in Category</div>
+    {{/if}}
   </div>
 </div>
-<div id="spotsContainer">
-  {{#if spots.length }}
-    {{#each spots }}
-      <section class="section">
-        <div class="title">{{name}}</div>
-        <div class="column">{{description}}</div>
-        <div class="column">Lat: {{latitude}}</div>
-        <div class="column">Long: {{longitude}}</div>
-      </section>
-    {{/each}}
-  {{else}}
-    <section class="section">
-      <div class="title">No Spots in Category</div>
-    </section>
-  {{/if}}
-</div>
 <script>
-  document.getElementById("categoryFilter").addEventListener("change", async function() {
-    const selectedCategory = this.value;
+  // Add event listeners to the category and county filters, call updateSpots when they change
+  document.getElementById("categoryFilter").addEventListener("change", updateSpots);
+  document.getElementById("countyFilter").addEventListener("change", updateSpots);
+
+  // Performs an AJAX request to update the spots displayed on the page
+  async function updateSpots() {
+    const selectedCategory = document.getElementById("categoryFilter").value;
+    const selectedCounty = document.getElementById("countyFilter").value;
     const url = new URL(window.location.href);
     if (selectedCategory) {
-      url.searchParams.set("categoryId", selectedCategory);
+      url.searchParams.set("category", selectedCategory);
     } else {
-      url.searchParams.delete("categoryId");
+      url.searchParams.delete("category");
+    }
+    if (selectedCounty) {
+      url.searchParams.set("county", selectedCounty);
+    } else {
+      url.searchParams.delete("county");
     }
 
+    // Fetch the updated spots and replace the spots container with the new content
     const response = await fetch(url.toString(), {
       headers: {
         "X-Requested-With": "XMLHttpRequest"
@@ -44,7 +62,33 @@
     const html = await response.text();
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
+    // Replaces the spots container with the new content
     const newSpotsContainer = doc.getElementById("spotsContainer");
     document.getElementById("spotsContainer").innerHTML = newSpotsContainer.innerHTML;
-  });
+    initialiseMaps();
+  }
+
+  // Initialises the maps on the page for each spot
+  function initialiseMaps() {
+    document.querySelectorAll('[id^="map-"]').forEach((mapElement, index) => {
+      // Extract the name, latitude and longitude attributes from the map element
+      const name = mapElement.getAttribute('name');
+      const latitude = mapElement.getAttribute('latitude');
+      const longitude = mapElement.getAttribute('longitude');
+
+      let map = L.map(mapElement.id).setView([latitude, longitude], 13);
+      L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        minZoom: 2,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(map);
+
+      // Adds a marker to the map with a popup containing the spot name and coordinates fetched from the map element
+      let marker = L.marker([latitude, longitude]).addTo(map);
+      marker.bindPopup(`<b>${name}</b><br>Lat: ${latitude}, Long: ${longitude}`);
+    });
+  }
+
+  // Initialises the maps when the page has loaded
+  document.addEventListener("DOMContentLoaded", initialiseMaps);
 </script>

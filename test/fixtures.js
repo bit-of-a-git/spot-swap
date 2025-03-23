@@ -35,6 +35,7 @@ export const testUsers = [
 
 export const galway = {
   title: "Best pubs in Galway",
+  county: "Galway",
 };
 
 export const derry = {
@@ -44,12 +45,15 @@ export const derry = {
 export const testCollections = [
   {
     title: "Great places to eat in Cork",
+    county: "Cork",
   },
   {
     title: "Street art in Waterford",
+    county: "Waterford",
   },
   {
     title: "Historic places in Dublin",
+    county: "Dublin",
   },
 ];
 
@@ -58,6 +62,7 @@ export const crane = {
   description: "Traditional Irish pub with live music.",
   latitude: 53.269936,
   longitude: -9.060466,
+  category: "Nightlife & Entertainment",
 };
 
 export const derryGirls = {
@@ -65,6 +70,7 @@ export const derryGirls = {
   description: "Mural of the cast of Derry Girls",
   latitude: 54.995162,
   longitude: -7.319278,
+  category: "Art & Culture",
 };
 
 export const testSpots = [
@@ -73,17 +79,20 @@ export const testSpots = [
     description: "Craft beer",
     latitude: 53.269956,
     longitude: -9.056947,
+    category: "Nightlife & Entertainment",
   },
   {
     name: "Tigh Neachtain",
     description: "Great place to people watch on a sunny day.",
     latitude: 53.271577,
     longitude: -9.053983,
+    category: "Nightlife & Entertainment",
   },
   {
     name: "Garavan's",
     description: "Whiskey bar",
     latitude: 53.273627,
     longitude: -9.051961,
+    category: "Nightlife & Entertainment",
   },
 ];

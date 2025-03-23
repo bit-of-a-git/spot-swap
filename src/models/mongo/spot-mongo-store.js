@@ -8,9 +8,8 @@ export const spotMongoStore = {
     return spots;
   },
 
-  async addSpot(collectionId, categoryId, spot) {
+  async addSpot(collectionId, spot) {
     spot.collectionId = collectionId;
-    spot.categoryId = categoryId;
     const newSpot = new Spot(spot);
     const spotObj = await newSpot.save();
     return this.getSpotById(spotObj._id);
@@ -21,8 +20,22 @@ export const spotMongoStore = {
     return spots;
   },
 
-  async getSpotsByCategoryId(id) {
-    const spots = await Spot.find({ categoryId: id }).lean();
+  async getSpotsByCategory(category) {
+    const spots = await Spot.find({ category: category }).lean();
+    return spots;
+  },
+
+  async getSpotsByCounty(county) {
+    const collections = await Collection.find({ county: county }).lean();
+    const collectionIds = collections.map((collection) => collection._id);
+    const spots = await Spot.find({ collectionId: { $in: collectionIds } }).lean();
+    return spots;
+  },
+
+  async getSpotsByCategoryAndCounty(category, county) {
+    const collections = await Collection.find({ county: county }).lean();
+    const collectionIds = collections.map((collection) => collection._id);
+    const spots = await Spot.find({ collectionId: { $in: collectionIds }, category: category }).lean();
     return spots;
   },
 
@@ -42,16 +55,25 @@ export const spotMongoStore = {
     }
   },
 
+  async deleteSpotsByCollectionId(collectionId) {
+    try {
+      await Spot.deleteMany({ collectionId: collectionId });
+    } catch (error) {
+      console.log("bad collection id");
+    }
+  },
+
   async deleteAllSpots() {
     await Spot.deleteMany({});
   },
 
-  async updateSpot(spot, updatedSpot) {
-    const spotDoc = await Spot.findOne({ _id: spot._id });
+  async updateSpot(updatedSpot) {
+    const spotDoc = await Spot.findOne({ _id: updatedSpot._id });
     spotDoc.name = updatedSpot.name;
     spotDoc.description = updatedSpot.description;
     spotDoc.latitude = updatedSpot.latitude;
     spotDoc.longitude = updatedSpot.longitude;
+    spotDoc.img = updatedSpot.img;
     await spotDoc.save();
   },
 };

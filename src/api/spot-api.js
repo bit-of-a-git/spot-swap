@@ -62,7 +62,7 @@ export const spotApi = {
     tags: ["api"],
     description: "Create a spot",
     notes: "Returns the newly created spot",
-    validate: { payload: SpotSpec },
+    validate: { params: { id: IdSpec }, payload: SpotSpec },
     response: { schema: SpotSpecPlus, failAction: validationError },
   },
 
