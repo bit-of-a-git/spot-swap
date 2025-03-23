@@ -27,7 +27,9 @@ Node.js and npm are required. Package dependencies are found in package.json.
 
 ## Installing the project locally
 
-To run the project locally, you must first create accounts with Cloudinary and MongoDB Atlas, creating a MongoDB Atlas database. You must also populate a .env file with the required values for Cloudinary and MongoDB. A .env.example file has been provided. Next...
+To run the project locally, you must first create an account with Cloudinary. Next, create a MongoDB account and create an Atlas database.
+
+You must also populate a .env file with the required values for Cloudinary and MongoDB. A .env.example file has been provided. Next...
 
 ```bash
 # Clone the repo
@@ -38,6 +40,12 @@ cd spot-swap
 
 # Install dependencies
 npm install
+
+# Copy example .env file 
+cp .env.example .env
+
+# Populate .env file
+# ...
 
 # Start the project
 npm start
@@ -74,6 +82,8 @@ I also referenced my previous SETU Web Development 2 project:
 Other sources referenced:
 - https://stackoverflow.com/questions/5110249/wildcard-in-css-for-classes
 - https://stackoverflow.com/questions/46785393/bulma-dropdown-not-working
+- https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
+- https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
 
 Images were taken from the following sources:
