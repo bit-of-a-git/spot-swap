@@ -1,29 +1,25 @@
 import { assert } from "chai";
 import { db } from "../../src/models/db.js";
-import { testSpots, galway, derry, derryGirls, foodCategory, testCategories } from "../fixtures.js";
+import { testSpots, galway, derry, derryGirls } from "../fixtures.js";
 import { assertSubset } from "../test-utils.js";
 
 suite("Spot Model tests", () => {
   let galwayList = null;
-  let pubCategory = null;
 
   setup(async () => {
     db.init("mongo");
     await db.collectionStore.deleteAllCollections();
     await db.spotStore.deleteAllSpots();
-    await db.categoryStore.deleteAllCategories();
     galwayList = await db.collectionStore.addCollection(galway);
-    pubCategory = await db.categoryStore.addCategory(foodCategory);
     for (let i = 0; i < testSpots.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      testSpots[i] = await db.spotStore.addSpot(galwayList._id, pubCategory._id, testSpots[i]);
+      testSpots[i] = await db.spotStore.addSpot(galwayList._id, testSpots[i]);
     }
   });
 
   test("create single spot", async () => {
     const derryList = await db.collectionStore.addCollection(derry);
-    const streetArtCategory = await db.categoryStore.addCategory(testCategories[1]);
-    const spot = await db.spotStore.addSpot(derryList._id, streetArtCategory._id, derryGirls);
+    const spot = await db.spotStore.addSpot(derryList._id, derryGirls);
     assert.isNotNull(spot._id);
     assertSubset(derryGirls, spot);
   });
@@ -43,8 +39,7 @@ suite("Spot Model tests", () => {
 
   test("get a spot - success", async () => {
     const derryList = await db.collectionStore.addCollection(derry);
-    const streetArtCategory = await db.categoryStore.addCategory(testCategories[1]);
-    const spot = await db.spotStore.addSpot(derryList._id, streetArtCategory._id, derryGirls);
+    const spot = await db.spotStore.addSpot(derryList._id, derryGirls);
     const newSpot = await db.spotStore.getSpotById(spot._id);
     assertSubset(derryGirls, newSpot);
   });

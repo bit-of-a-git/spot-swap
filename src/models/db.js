@@ -27,7 +27,6 @@ export const db = {
         this.userStore = userMongoStore;
         this.collectionStore = collectionMongoStore;
         this.spotStore = spotMongoStore;
-        this.categoryStore = categoryMongoStore;
         connectMongo();
         break;
       default:
