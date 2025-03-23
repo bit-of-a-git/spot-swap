@@ -10,14 +10,7 @@
     <div class="column is-one-fifth">
       <div class="field">
         <label class="label has-text-white-ter">Filter by Category</label>
-        <div class="select">
-          <select id="categoryFilter" required>
-            <option value="" selected>All Categories</option>
-            {{#each categories }}
-              <option value="{{this._id}}">{{this.name}}</option>
-            {{/each}}
-          </select>
-        </div>
+        {{>categories-selector}}
       </div>
     </div>
   </div>
@@ -26,6 +19,7 @@
       {{#each spots }}
         <section class="section">
           <div class="title has-text-white-ter">{{name}}</div>
+          <div class="subtitle is-6 has-text-warning">{{category}}</div>
           <div class="column">{{description}}</div>
           {{#if img }}
             <div class="columns">
@@ -57,14 +51,14 @@
     const selectedCounty = document.getElementById("countyFilter").value;
     const url = new URL(window.location.href);
     if (selectedCategory) {
-      url.searchParams.set("categoryId", selectedCategory);
+      url.searchParams.set("category", selectedCategory);
     } else {
-      url.searchParams.delete("categoryId");
+      url.searchParams.delete("category");
     }
     if (selectedCounty) {
-      url.searchParams.set("countyFilter", selectedCounty);
+      url.searchParams.set("county", selectedCounty);
     } else {
-      url.searchParams.delete("countyFilter");
+      url.searchParams.delete("county");
     }
 
     const response = await fetch(url.toString(), {

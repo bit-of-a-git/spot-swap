@@ -10,7 +10,6 @@ import { connectMongo } from "./mongo/connect.js";
 import { userMongoStore } from "./mongo/user-mongo-store.js";
 import { collectionMongoStore } from "./mongo/collection-mongo-store.js";
 import { spotMongoStore } from "./mongo/spot-mongo-store.js";
-import { categoryMongoStore } from "./mongo/category-mongo-store.js";
 
 export const db = {
   userStore: null,

@@ -7,22 +7,20 @@ export const spotController = {
     auth: false,
     handler: async function (request, h) {
       let spots;
-      const categories = await db.categoryStore.getAllCategories();
-      const { categoryId } = await request.query;
-      const { countyFilter } = await request.query;
-      if (categoryId && countyFilter) {
-        spots = await db.spotStore.getSpotsByCategoryAndCounty(categoryId, countyFilter);
-      } else if (categoryId) {
-        spots = await db.spotStore.getSpotsByCategoryId(categoryId);
-      } else if (countyFilter) {
-        spots = await db.spotStore.getSpotsByCounty(countyFilter);
+      const { category } = await request.query;
+      const { county } = await request.query;
+      if (category && county) {
+        spots = await db.spotStore.getSpotsByCategoryAndCounty(category, county);
+      } else if (category) {
+        spots = await db.spotStore.getSpotsByCategory(category);
+      } else if (county) {
+        spots = await db.spotStore.getSpotsByCounty(county);
       } else {
         spots = await db.spotStore.getAllSpots();
       }
       const viewData = {
         title: "Spots",
         spots: spots,
-        categories: categories,
       };
       return h.view("spot-view", viewData);
     },

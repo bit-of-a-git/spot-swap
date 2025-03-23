@@ -58,36 +58,6 @@ export const seedData = {
       county: "Cork",
     },
   },
-  categories: {
-    _model: "Category",
-    food: {
-      name: "Food & Drink",
-    },
-    nature: {
-      name: "Nature & Outdoors",
-    },
-    history: {
-      name: "Historical Sites",
-    },
-    culture: {
-      name: "Art & Culture",
-    },
-    nightlife: {
-      name: "Nightlife & Entertainment",
-    },
-    shopping: {
-      name: "Shopping",
-    },
-    adventure: {
-      name: "Adventure & Sports",
-    },
-    relaxation: {
-      name: "Relaxation & Wellness",
-    },
-    unusual: {
-      name: "Unusual Experiences",
-    },
-  },
   spots: {
     _model: "Spot",
     spot_1: {
@@ -97,7 +67,7 @@ export const seedData = {
       latitude: 54.25326,
       longitude: -8.55774,
       collectionId: "->collections.sligo",
-      categoryId: "->categories.nature",
+      category: "Nature & Outdoors",
       img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633365/header-queen-maeve-county-sligo_xjhfou.jpg",
     },
     spot_2: {
@@ -106,7 +76,7 @@ export const seedData = {
       latitude: 53.540515,
       longitude: -9.286646,
       collectionId: "->collections.cong",
-      categoryId: "->categories.culture",
+      category: "Art & Culture",
       img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633432/IMG_7364-001_cac4dp.jpg",
     },
     spot_3: {
@@ -115,7 +85,7 @@ export const seedData = {
       latitude: 54.60815,
       longitude: -5.909918,
       collectionId: "->collections.belfast",
-      categoryId: "->categories.history",
+      category: "Historical Sites",
       img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633469/Titanic_Belfast_HDR_fwpssc.jpg",
     },
     spot_4: {
@@ -124,7 +94,7 @@ export const seedData = {
       latitude: 53.5486,
       longitude: -9.8852,
       collectionId: "->collections.galway",
-      categoryId: "->categories.nature",
+      category: "Nature & Outdoors",
       img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633488/Connemara12Bens_cn1cii.jpg",
     },
     spot_5: {
@@ -133,7 +103,7 @@ export const seedData = {
       latitude: 53.272776,
       longitude: -9.049986,
       collectionId: "->collections.galway",
-      categoryId: "->categories.nature",
+      category: "Food & Drink",
       img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633831/pizza-point-1200x741-1_wqagys.jpg",
     },
     spot_6: {
@@ -142,7 +112,7 @@ export const seedData = {
       latitude: 53.25815,
       longitude: -9.086178,
       collectionId: "->collections.galway",
-      categoryId: "->categories.nature",
+      category: "Nature & Outdoors",
       img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742634055/CityParkCircleOfLife2-scaled_qf47z5.jpg",
     },
     spot_7: {
@@ -151,7 +121,7 @@ export const seedData = {
       latitude: 51.898,
       longitude: -8.472,
       collectionId: "->collections.cork",
-      categoryId: "->categories.nightlife",
+      category: "Nightlife & Entertainment",
       img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633542/function-room-cork-coughlans-2_csrx9n.jpg",
     },
   },

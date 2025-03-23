@@ -21,14 +21,7 @@
     <div class="column is-one-third">
       <div class="field">
         <label class="label has-text-white-ter">Category</label>
-        <div class="select">
-          <select name="category" required>
-            <option value="" disabled selected>Select a category</option>
-            {{#each categories }}
-              <option value="{{this._id}}">{{this.name}}</option>
-            {{/each}}
-          </select>
-        </div>
+        {{>categories-selector}}
       </div>
     </div>
   </div>
@@ -63,7 +56,7 @@
     </div>
     <div class="column is-one-third align-bottom">
       <div class="field">
-        <p id="geo-status"></p>
+        <p id="geo-status has-text-white-ter"></p>
         <button id="find-me" type="button" class="button is-info">Use my current location</button>
       </div>
     </div>

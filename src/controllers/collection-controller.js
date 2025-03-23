@@ -7,11 +7,9 @@ export const collectionController = {
   index: {
     handler: async function (request, h) {
       const collection = await db.collectionStore.getCollectionById(request.params.id);
-      const categories = await db.categoryStore.getAllCategories();
       const viewData = {
         title: "Collection",
         collection: collection,
-        categories: categories,
         titleLink: "/dashboard",
       };
       return h.view("collection-view", viewData);
@@ -30,13 +28,12 @@ export const collectionController = {
     },
     handler: async function (request, h) {
       const collection = await db.collectionStore.getCollectionById(request.params.id);
-      const category = await db.categoryStore.getCategoryById(request.payload.category);
       const newSpot = {
         name: request.payload.name,
         description: request.payload.description,
         latitude: request.payload.latitude,
         longitude: request.payload.longitude,
-        categoryId: category._id,
+        category: request.payload.category,
       };
       await db.spotStore.addSpot(collection._id, newSpot);
       return h.redirect(`/collection/${collection._id}`);

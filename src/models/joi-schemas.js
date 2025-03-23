@@ -50,12 +50,15 @@ export const SpotSpec = Joi.object()
     description: Joi.string().allow("").optional(),
     latitude: Joi.number().min(-90).max(90).precision(6).required(),
     longitude: Joi.number().min(-180).max(180).precision(6).required(),
+    category: Joi.string().example("Nature & Outdoors").required(),
   })
   .label("Spot");
 
 export const SpotSpecPlus = SpotSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
+  collectionId: IdSpec,
+  img: Joi.string().allow("").optional(),
 }).label("SpotPlus");
 
 export const SpotArraySpec = Joi.array().items(SpotSpecPlus).label("SpotArray");

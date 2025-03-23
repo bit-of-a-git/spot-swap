@@ -12,10 +12,7 @@ const spotSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Collection",
   },
-  categoryId: {
-    type: Schema.Types.ObjectId,
-    ref: "Category",
-  },
+  category: String,
 });
 
 export const Spot = Mongoose.model("Spot", spotSchema);
