@@ -18,9 +18,7 @@ export const collectionController = {
 
   addSpot: {
     validate: {
-      payload: SpotSpec.keys({
-        category: Joi.string().required(),
-      }),
+      payload: SpotSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
         return h.view("collection-view", { title: "Add Spot error", errors: error.details }).takeover().code(400);
