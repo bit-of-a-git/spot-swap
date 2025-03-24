@@ -51,7 +51,7 @@
     </div>
     <div class="column is-one-third align-bottom">
       <div class="field">
-        <p id="geo-status has-text-white-ter"></p>
+        <p id="geo-status" class="has-text-white-ter"></p>
         <button id="find-me" type="button" class="button is-info">Use my current location</button>
       </div>
     </div>
@@ -81,12 +81,13 @@
     }
     marker = L.marker([lat, lng]).addTo(map);
     map.setView([lat, lng], 13);
-    marker.bindPopup(`<b>Your Location</b><br>Lat: ${lat}, Long: ${lng}`).openPopup();
+    marker.bindPopup(`Lat: ${lat}, Long: ${lng}`).openPopup();
     document.querySelector("#latitude").value = lat;
     document.querySelector("#longitude").value = lng;
   }
 
   // Geolocation function
+  // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API
   function geoFindMe() {
     const status = document.querySelector("#geo-status");
     const latitudeInput = document.querySelector("#latitude");

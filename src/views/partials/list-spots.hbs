@@ -46,6 +46,7 @@
               </div>
             </form>
           </div>
+          {{>file-input-script}}
         {{/if}}
         <a href="/collection/{{../collection._id}}/deletespot/{{ _id }}"
            class="ui icon button is-danger is-pulled-right"
@@ -58,4 +59,3 @@
 {{else}}
   <div class="title has-text-white-ter">No Spots</div>
 {{/if}}
-{{>file-input-script}}
