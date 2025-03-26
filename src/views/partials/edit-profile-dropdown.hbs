@@ -1,0 +1,33 @@
+<div class="dropdown">
+  <div class="dropdown-trigger">
+    <button id="profile"
+            class="button"
+            aria-haspopup="true"
+            aria-controls="dropdown-menu">
+      <span class="icon is-large">
+        <i class="fa-solid fa-user"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu" role="menu">
+    <div class="dropdown-content">
+      <a href="/edit-profile" class="dropdown-item">Edit Profile</a>
+      <a href="/logout" class="dropdown-item">Log Out</a>
+    </div>
+  </div>
+</div>
+<script>
+  // https://stackoverflow.com/questions/46785393/bulma-dropdown-not-working
+  const dropdown = document.querySelector('.dropdown');
+  dropdown.addEventListener('click', function(event) {
+  event.stopPropagation();
+  dropdown.classList.toggle('is-active');
+  });
+
+  // Closes dropdowns when clicking outside
+  document.addEventListener('click', function() {
+    dropdowns.forEach(dropdown => {
+      dropdown.classList.remove('is-active');
+    });
+  });
+</script>
