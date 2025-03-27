@@ -1,7 +1,7 @@
-{{> welcome-menu active="spots"}}
+{{> menu active="spots"}}
 <div class="box has-background-black-ter has-text-white-ter">
   <div class="columns">
-    <div class="column is-one-fifth">{{> counties-selector}}</div>
+    <div class="column is-one-fifth">{{>counties-selector}}</div>
     <div class="column is-one-fifth">{{>categories-selector}}</div>
   </div>
   <div id="spotsContainer">
@@ -38,7 +38,7 @@
   document.getElementById("categoryFilter").addEventListener("change", updateSpots);
   document.getElementById("countyFilter").addEventListener("change", updateSpots);
 
-  // Performs an AJAX request to update the spots displayed on the page
+  // Performs a fetch API request to update the spots displayed on the page
   async function updateSpots() {
     const selectedCategory = document.getElementById("categoryFilter").value;
     const selectedCounty = document.getElementById("countyFilter").value;
@@ -58,8 +58,11 @@
     const response = await fetch(url.toString(), {
     });
     const html = await response.text();
+
+    // Parses the HTML string into a DOM document
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
+    
     // Replaces the spots container with the new content
     const newSpotsContainer = doc.getElementById("spotsContainer");
     document.getElementById("spotsContainer").innerHTML = newSpotsContainer.innerHTML;
