@@ -22,31 +22,7 @@
           </div>
         {{else}}
           {{>map}}
-          <div class="card-content">
-            <div class="subtitle has-text-white-ter">Upload Image</div>
-            <form action="/collection/{{../collection._id}}/uploadspotimage/{{_id}}"
-                  method="POST"
-                  enctype="multipart/form-data">
-              <div id="file-select" class="file has-name is-fullwidth">
-                <label class="file-label">
-                  <input class="file-input"
-                         name="imagefile"
-                         type="file"
-                         name="resume"
-                         accept="image/png, image/jpeg">
-                  <span class="file-cta">
-                    <span class="file-icon">
-                      <i class="fas fa-upload"></i>
-                    </span>
-                    <span class="file-label">Choose a file…</span>
-                  </span>
-                  <span class="file-name"></span>
-                </label>
-                <button type="submit" class="button is-info">Upload</button>
-              </div>
-            </form>
-          </div>
-          {{>file-input-script}}
+          {{>file-input}}
         {{/if}}
         <a href="/collection/{{../collection._id}}/deletespot/{{ _id }}"
            class="ui icon button is-danger is-pulled-right"
