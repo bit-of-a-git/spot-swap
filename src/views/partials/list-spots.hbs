@@ -22,7 +22,7 @@
           </div>
         {{else}}
           {{>map}}
-          {{>file-input}}
+          {{>file-input collectionId=../collection._id}}
         {{/if}}
         <a href="/collection/{{../collection._id}}/deletespot/{{ _id }}"
            class="ui icon button is-danger is-pulled-right"
