@@ -1,3 +1,4 @@
+import os from "os";
 import { accountsController } from "./controllers/accounts-controller.js";
 import { dashboardController } from "./controllers/dashboard-controller.js";
 import { collectionController } from "./controllers/collection-controller.js";
@@ -34,4 +35,12 @@ export const webRoutes = [
   { method: "GET", path: "/collections", config: adminController.collections },
   { method: "GET", path: "/deleteuser/{id}", config: adminController.deleteUser },
   { method: "GET", path: "/analytics", config: adminController.analytics },
+  {
+    method: "GET",
+    path: "/testlb",
+    handler: function (request, h) {
+      return `Server: ${os.hostname()}`;
+    },
+    config: { auth: false },
+  },
 ];
