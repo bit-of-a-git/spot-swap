@@ -31,16 +31,16 @@ export const collectionApi = {
       try {
         const collection = await db.collectionStore.getCollectionById(request.params.id);
         if (!collection) {
-          return Boom.notFound("No Collection with this id");
+          return Boom.notFound("No collection with this id");
         }
         return h.response(collection).code(200);
       } catch (err) {
         console.log(err);
-        return Boom.serverUnavailable("No Collection with this id");
+        return Boom.serverUnavailable("No collection with this id");
       }
     },
     tags: ["api"],
-    description: "Find a Collection",
+    description: "Find a collection",
     notes: "Returns a collection",
     validate: { params: { id: IdSpec }, failAction: validationError },
     response: { schema: CollectionSpecPlus, failAction: validationError },
@@ -70,7 +70,7 @@ export const collectionApi = {
       }
     },
     tags: ["api"],
-    description: "Create a Collection",
+    description: "Create a collection",
     notes: "Returns the newly created collection",
     validate: { payload: CollectionSpec, failAction: validationError },
     response: { schema: CollectionSpecPlus, failAction: validationError },
@@ -84,12 +84,12 @@ export const collectionApi = {
       try {
         const collection = await db.collectionStore.getCollectionById(request.params.id);
         if (!collection) {
-          return Boom.notFound("No Collection with this id");
+          return Boom.notFound("No collection with this id");
         }
         await db.collectionStore.deleteCollectionById(collection._id);
         return h.response().code(204);
       } catch (err) {
-        return Boom.serverUnavailable("No Collection with this id");
+        return Boom.serverUnavailable("No collection with this id");
       }
     },
     tags: ["api"],
@@ -110,6 +110,6 @@ export const collectionApi = {
       }
     },
     tags: ["api"],
-    description: "Delete all Collections",
+    description: "Delete all collections",
   },
 };

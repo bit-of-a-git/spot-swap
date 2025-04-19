@@ -31,11 +31,11 @@ export const userApi = {
       try {
         const user = await db.userStore.getUserById(request.params.id);
         if (!user) {
-          return Boom.notFound("No User with this id");
+          return Boom.notFound("No user with this id");
         }
         return h.response(user).code(200);
       } catch (err) {
-        return Boom.serverUnavailable("No User with this id");
+        return Boom.serverUnavailable("No user with this id");
       }
     },
     tags: ["api"],
@@ -59,7 +59,7 @@ export const userApi = {
       }
     },
     tags: ["api"],
-    description: "Create a User",
+    description: "Create a user",
     notes: "Returns the newly created user",
     validate: { payload: UserSpec, failAction: validationError },
     response: { schema: UserSpecPlus, failAction: validationError },
@@ -118,7 +118,7 @@ export const userApi = {
       }
     },
     tags: ["api"],
-    description: "Authenticates a User",
+    description: "Authenticates a user",
     notes: "Creates and returns a JWT token if the user's credentials are valid. Otherwise returns 401 error.",
     validate: { payload: UserCredentialsSpec, failAction: validationError },
     response: { schema: JWTSpec, failAction: validationError },
