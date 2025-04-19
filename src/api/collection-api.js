@@ -12,7 +12,7 @@ export const collectionApi = {
     handler: async function (request, h) {
       try {
         const collections = await db.collectionStore.getAllCollections();
-        return collections;
+        return h.response(collections).code(200);
       } catch (err) {
         return Boom.serverUnavailable("Database Error");
       }
@@ -27,14 +27,15 @@ export const collectionApi = {
     auth: {
       strategy: "jwt",
     },
-    async handler(request) {
+    async handler(request, h) {
       try {
         const collection = await db.collectionStore.getCollectionById(request.params.id);
         if (!collection) {
           return Boom.notFound("No Collection with this id");
         }
-        return collection;
+        return h.response(collection).code(200);
       } catch (err) {
+        console.log(err);
         return Boom.serverUnavailable("No Collection with this id");
       }
     },

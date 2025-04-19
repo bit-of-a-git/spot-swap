@@ -11,7 +11,7 @@ export const spotApi = {
     handler: async function (request, h) {
       try {
         const spots = await db.spotStore.getAllSpots();
-        return spots;
+        return h.response(spots).code(200);
       } catch (err) {
         return Boom.serverUnavailable("Database Error");
       }
@@ -32,7 +32,7 @@ export const spotApi = {
         if (!spot) {
           return Boom.notFound("No spot with this id");
         }
-        return spot;
+        return h.response(spot).code(200);
       } catch (err) {
         return Boom.serverUnavailable("No spot with this id");
       }

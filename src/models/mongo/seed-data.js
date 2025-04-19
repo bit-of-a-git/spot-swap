@@ -86,7 +86,7 @@ export const seedData = {
       longitude: -5.909918,
       collectionId: "->collections.belfast",
       category: "Historical Sites",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742715569/Titanic_Belfast_HDR_fwpssc_ahyhp7.jpg",
+      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1744306293/Titanic_Belfast_HDR_fwpssc_iookxo.jpg",
     },
     spot_4: {
       name: "Connemara National Park",
@@ -95,7 +95,7 @@ export const seedData = {
       longitude: -9.8852,
       collectionId: "->collections.galway",
       category: "Nature & Outdoors",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742715610/Connemara12Bens_m6a0se.jpg",
+      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1743151271/vt2dddo6attpc5kayzvk.jpg",
     },
     spot_5: {
       name: "Pizza Point",
@@ -104,7 +104,7 @@ export const seedData = {
       longitude: -9.049986,
       collectionId: "->collections.galway",
       category: "Food & Drink",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633831/pizza-point-1200x741-1_wqagys.jpg",
+      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1744306460/pizza-point-1200x741-1_ljxskc.jpg",
     },
     spot_6: {
       name: "Circle of Life Commemorative Garden",
@@ -113,7 +113,7 @@ export const seedData = {
       longitude: -9.086178,
       collectionId: "->collections.galway",
       category: "Nature & Outdoors",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742634055/CityParkCircleOfLife2-scaled_qf47z5.jpg",
+      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1744306548/CityParkCircleOfLife2-scaled_lf6eqs.jpg",
     },
     spot_7: {
       name: "Coughlan's",
