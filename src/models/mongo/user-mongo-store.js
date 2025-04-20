@@ -1,4 +1,6 @@
+import bcrypt from "bcrypt";
 import Mongoose from "mongoose";
+import { saltRounds } from "../../utils/config.js";
 import { User } from "./user.js";
 import { collectionMongoStore } from "./collection-mongo-store.js";
 
@@ -18,6 +20,7 @@ export const userMongoStore = {
 
   async addUser(user) {
     const newUser = new User(user);
+    newUser.password = await bcrypt.hash(newUser.password, saltRounds);
     const userObj = await newUser.save();
     const u = await this.getUserById(userObj._id);
     return u;
@@ -59,9 +62,10 @@ export const userMongoStore = {
 
   async updatePassword(id, newPassword) {
     try {
-      await User.updateOne({ _id: id }, { $set: { password: newPassword } });
+      const hashedPassword = await bcrypt.hash(newPassword, saltRounds);
+      await User.updateOne({ _id: id }, { $set: { password: hashedPassword } });
     } catch (error) {
-      console.log("bad id");
+      console.log(`Error updating password for user ${id}: ${error.message}`);
     }
   },
 };
