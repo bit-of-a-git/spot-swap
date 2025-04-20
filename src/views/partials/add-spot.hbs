@@ -1,6 +1,4 @@
-<form class="box has-background-black-ter"
-      action="/collection/{{collection._id}}/addspot"
-      method="POST">
+<form class="box has-background-black-ter" action="/collection/{{collection._id}}/addspot" method="post">
   <div class="title is-4 has-text-white-ter">Add Spot</div>
   <div class="columns">
     <div class="column is-one-third">
@@ -12,10 +10,7 @@
     <div class="column is-one-third">
       <div class="field">
         <label class="label has-text-white-ter">Description</label>
-        <input class="input"
-               type="text"
-               placeholder="Enter Description"
-               name="description">
+        <input class="input" type="text" placeholder="Enter Description" name="description">
       </div>
     </div>
     <div class="column is-one-third">{{>categories-selector}}</div>
@@ -24,29 +19,15 @@
     <div class="column is-one-third">
       <div class="field">
         <label class="label has-text-white-ter">Latitude</label>
-        <input class="input"
-               id="latitude"
-               type="number"
-               placeholder="00.00"
-               name="latitude"
-               step="0.000001"
-               min="-90"
-               max="90"
-               required>
+        <input class="input" id="latitude" type="number" placeholder="00.00" name="latitude" step="0.000001" min="-90"
+          max="90" required>
       </div>
     </div>
     <div class="column is-one-third">
       <div class="field">
         <label class="label has-text-white-ter">Longitude</label>
-        <input class="input"
-               id="longitude"
-               type="number"
-               placeholder="00.00"
-               name="longitude"
-               step="0.000001"
-               min="-180"
-               max="180"
-               required>
+        <input class="input" id="longitude" type="number" placeholder="00.00" name="longitude" step="0.000001"
+          min="-180" max="180" required>
       </div>
     </div>
     <div class="column is-one-third align-bottom">
@@ -119,7 +100,7 @@
   document.querySelector("#find-me").addEventListener("click", geoFindMe);
 
   // Event listener for map clicks. Updates the marker and input fields with the clicked location
-  map.on('click', function(e) {
+  map.on('click', function (e) {
     const lat = e.latlng.lat.toFixed(6);
     const lng = e.latlng.lng.toFixed(6);
     updateMarkerAndInputs(lat, lng);

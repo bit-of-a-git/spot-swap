@@ -1,15 +1,11 @@
 {{#each collections }}
-  <div class="box has-background-black-ter">
-    <h2 class="title has-text-white-ter">{{title}}</h2>
-    <a href="/collection/{{_id}}"
-       class="ui icon button is-link"
-       title="Open Collection">
-      <i class="fas fa-folder-open"></i>
-    </a>
-    <a href="/dashboard/deletecollection/{{_id}}"
-       class="ui icon button is-danger"
-       title="Delete Collection">
-      <i class="fas fa-trash"></i>
-    </a>
-  </div>
+<div class="box has-background-black-ter">
+  <h2 class="title has-text-white-ter">{{title}}</h2>
+  <a href="/collection/{{_id}}" class="ui icon button is-link" title="Open Collection">
+    <i class="fas fa-folder-open"></i>
+  </a>
+  <a href="/dashboard/deletecollection/{{_id}}" class="ui icon button is-danger" title="Delete Collection">
+    <i class="fas fa-trash"></i>
+  </a>
+</div>
 {{/each}}
