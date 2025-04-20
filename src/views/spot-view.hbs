@@ -1,34 +1,34 @@
 {{> menu active="spots"}}
 <div class="box has-background-black-ter has-text-white-ter">
   <div class="columns">
-    <div class="column is-one-fifth">{{>counties-selector}}</div>
+    <div class="column is-one-fifth">{{>counties-selector message="Filter by County"}}</div>
     <div class="column is-one-fifth">{{>categories-selector}}</div>
   </div>
   <div id="spotsContainer">
     {{#if spots.length }}
-      {{#each spots }}
-        <section class="section">
-          <div class="title has-text-white-ter">{{name}}</div>
-          <div class="subtitle is-6 has-text-warning">{{category}}</div>
-          <div class="column">{{description}}</div>
-          {{#if img }}
-            <div class="columns">
-              <div class="column is-half">{{>map}}</div>
-              <div class="column is-half">
-                <div class="card-image">
-                  <figure class="image is-256x256">
-                    <img src={{img}}>
-                  </figure>
-                </div>
-              </div>
-            </div>
-          {{else}}
-            {{>map}}
-          {{/if}}
-        </section>
-      {{/each}}
+    {{#each spots }}
+    <section class="section">
+      <div class="title has-text-white-ter">{{name}}</div>
+      <div class="subtitle is-6 has-text-warning">{{category}}</div>
+      <div class="column">{{description}}</div>
+      {{#if img }}
+      <div class="columns">
+        <div class="column is-half">{{>map}}</div>
+        <div class="column is-half">
+          <div class="card-image">
+            <figure class="image is-256x256">
+              <img src={{img}} alt="Picture of {{name}}">
+            </figure>
+          </div>
+        </div>
+      </div>
+      {{else}}
+      {{>map}}
+      {{/if}}
+    </section>
+    {{/each}}
     {{else}}
-      <div class="title has-text-white-ter">No Spots in Category</div>
+    <div class="title has-text-white-ter">No Spots in County/Category</div>
     {{/if}}
   </div>
 </div>
@@ -62,7 +62,7 @@
     // Parses the HTML string into a DOM document
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
-    
+
     // Replaces the spots container with the new content
     const newSpotsContainer = doc.getElementById("spotsContainer");
     document.getElementById("spotsContainer").innerHTML = newSpotsContainer.innerHTML;

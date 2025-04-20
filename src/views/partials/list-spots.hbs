@@ -1,37 +1,36 @@
 {{#if collection.spots.length }}
-  {{#each collection.spots }}
-    <div class="box has-background-black-ter has-text-white-ter">
-      <section class="section">
-        <div class="title has-text-white-ter">{{name}}</div>
-        <div class="subtitle is-6 has-text-warning">{{category}}</div>
-        <div class="column">{{description}}</div>
-        {{#if img }}
-          <div class="columns">
-            <div class="column is-half">{{>map}}</div>
-            <div class="column is-half">
-              <div class="card-image">
-                <figure class="image is-256x256">
-                  <img src={{img}}>
-                  <a href="/collection/{{../collection._id}}/deletespotimage/{{_id}}"
-                     class="button is-danger image-deletion-button">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                </figure>
-              </div>
-            </div>
-          </div>
-        {{else}}
-          {{>map}}
-          {{>file-input collectionId=../collection._id}}
-        {{/if}}
-        <a href="/collection/{{../collection._id}}/deletespot/{{ _id }}"
-           class="ui icon button is-danger is-pulled-right"
-           title="Delete Spot">
-          <i class="fas fa-trash"></i>
-        </a>
-      </section>
+{{#each collection.spots }}
+<div class="box has-background-black-ter has-text-white-ter">
+  <section class="section">
+    <div class="title has-text-white-ter">{{name}}</div>
+    <div class="subtitle is-6 has-text-warning">{{category}}</div>
+    <div class="column">{{description}}</div>
+    {{#if img }}
+    <div class="columns">
+      <div class="column is-half">{{>map}}</div>
+      <div class="column is-half">
+        <div class="card-image">
+          <figure class="image is-256x256">
+            <img src={{img}} alt="Picture of {{name}}">
+            <a href="/collection/{{../collection._id}}/deletespotimage/{{_id}}"
+              class="button is-danger image-deletion-button">
+              <i class="fas fa-trash"></i>
+            </a>
+          </figure>
+        </div>
+      </div>
     </div>
-  {{/each}}
+    {{else}}
+    {{>map}}
+    {{>file-input collectionId=../collection._id}}
+    {{/if}}
+    <a href="/collection/{{../collection._id}}/deletespot/{{ _id }}" class="ui icon button is-danger is-pulled-right"
+      title="Delete Spot">
+      <i class="fas fa-trash"></i>
+    </a>
+  </section>
+</div>
+{{/each}}
 {{else}}
-  <div class="title has-text-white-ter">No Spots</div>
+<div class="title has-text-white-ter">No Spots</div>
 {{/if}}
