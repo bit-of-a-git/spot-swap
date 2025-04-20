@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import { db } from "../models/db.js";
 import { UserSpec, UserCredentialsSpec, NameSpec, UpdateEmailSpec, UpdatePasswordSpec } from "../models/joi-schemas.js";
 
@@ -56,7 +57,8 @@ export const accountsController = {
     handler: async function (request, h) {
       const { email, password } = request.payload;
       const user = await db.userStore.getUserByEmail(email);
-      if (!user || user.password !== password) {
+      const passwordsMatch = await bcrypt.compare(password, user.password);
+      if (!user || !passwordsMatch) {
         const errors = [{ message: "Invalid email or password" }];
         return h.view("login-view", { title: "Log in error", errors: errors }).code(400);
       }
@@ -156,7 +158,8 @@ export const accountsController = {
     handler: async function (request, h) {
       const { currentPassword, newPassword, confirmNewPassword } = request.payload;
       const user = request.auth.credentials;
-      if (currentPassword === user.password && newPassword === confirmNewPassword) {
+      const passwordsMatch = await bcrypt.compare(currentPassword, user.password);
+      if (passwordsMatch && newPassword === confirmNewPassword) {
         try {
           await db.userStore.updatePassword(user, newPassword);
           return h.redirect("/edit-profile");
