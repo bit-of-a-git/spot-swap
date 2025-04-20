@@ -1,23 +1,21 @@
-<nav class="box navbar has-background-white-ter"
-     role="navigation"
-     aria-label="main navigation">
+<nav class="box navbar has-background-white-ter" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">{{> brand}}</div>
   <div id="navMenu" class="navbar-menu">
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
           {{#if isAdmin }}
-            <a id="dashboard" class="button" href="/admin">Dashboard</a>
-            <a id="collections" class="button" href="/collections">Collections</a>
-            <a id="analytics" class="button" href="/analytics">Analytics</a>
-            {{> edit-profile-dropdown}}
-            {{else if isUser}}
-            <a id="dashboard" class="button" href="/dashboard">Dashboard</a>
-            {{> edit-profile-dropdown}}
+          <a id="dashboard" class="button" href="/admin">Dashboard</a>
+          <a id="collections" class="button" href="/collections">Collections</a>
+          <a id="analytics" class="button" href="/analytics">Analytics</a>
+          {{> edit-profile-dropdown}}
+          {{else if isUser}}
+          <a id="dashboard" class="button" href="/dashboard">Dashboard</a>
+          {{> edit-profile-dropdown}}
           {{else}}
-            <a class="button" id="spots" href="/spots">Spots</a>
-            <a class="button" id="login" href="/login">Log In</a>
-            <a class="button" id="signup" href="/signup">Sign Up</a>
+          <a class="button" id="spots" href="/spots">Spots</a>
+          <a class="button" id="login" href="/login">Log In</a>
+          <a class="button" id="signup" href="/signup">Sign Up</a>
           {{/if}}
         </div>
       </div>
