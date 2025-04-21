@@ -24,7 +24,7 @@ suite("Authentication API tests", async () => {
 
     const userInfo = decodeToken(response.token);
     assert.equal(userInfo.email, returnedUser.email);
-    assert.equal(userInfo.userId, returnedUser._id);
+    assert.equal(userInfo.id, returnedUser._id);
   });
 
   test("check Unauthorized", async () => {

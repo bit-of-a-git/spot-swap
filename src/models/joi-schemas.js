@@ -82,6 +82,8 @@ export const CollectionArraySpec = Joi.array().items(CollectionSpecPlus).label("
 export const JWTSpec = Joi.object()
   .keys({
     success: Joi.boolean().example("true").required(),
+    name: Joi.string().example("Homer Simpson").required(),
+    _id: IdSpec,
     token: Joi.string().example("xxxxx.yyyyy.zzzzz").required(),
   })
   .label("JWT");
