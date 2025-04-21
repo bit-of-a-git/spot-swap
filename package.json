@@ -15,7 +15,8 @@
     "lint": "./node_modules/.bin/eslint . --ext .js",
     "test": "mocha --ui tdd test/**/*.js -exit",
     "testapi": "mocha --ui tdd test/api/**/*.js -exit",
-    "testmodels": "mocha --ui tdd test/models/**/*.js -exit"
+    "testmodels": "mocha --ui tdd test/models/**/*.js -exit",
+    "seed": "node src/server.js --seed"
   },
   "devDependencies": {
     "axios": "^1.8.1",

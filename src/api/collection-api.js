@@ -46,6 +46,25 @@ export const collectionApi = {
     response: { schema: CollectionSpecPlus, failAction: validationError },
   },
 
+  findByUser: {
+    auth: {
+      strategy: "jwt",
+    },
+    async handler(request, h) {
+      try {
+        const collections = await db.collectionStore.getUserCollections(request.params.id);
+        return h.response(collections).code(200);
+      } catch (err) {
+        return Boom.serverUnavailable("No collection with this id");
+      }
+    },
+    tags: ["api"],
+    description: "Get a user's collections",
+    notes: "Returns any collections that match specified user ID",
+    validate: { params: { id: IdSpec }, failAction: validationError },
+    response: { schema: CollectionArraySpec, failAction: validationError },
+  },
+
   create: {
     auth: {
       strategy: "jwt",

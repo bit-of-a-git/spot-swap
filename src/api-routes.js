@@ -18,6 +18,7 @@ export const apiRoutes = [
   { method: "GET", path: "/api/collections", config: collectionApi.find },
   { method: "GET", path: "/api/collections/{id}", config: collectionApi.findOne },
   { method: "DELETE", path: "/api/collections/{id}", config: collectionApi.deleteOne },
+  { method: "GET", path: "/api/collections/user/{id}", config: collectionApi.findByUser },
 
   { method: "GET", path: "/api/spots", config: spotApi.find },
   { method: "GET", path: "/api/spots/{id}", config: spotApi.findOne },
