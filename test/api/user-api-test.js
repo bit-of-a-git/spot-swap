@@ -46,7 +46,7 @@ suite("User API tests", () => {
       const returnedUser = await spotswapService.getUser("1234");
       assert.fail("Should not return a response");
     } catch (error) {
-      assert(error.response.data.message === "No User with this id");
+      assert(error.response.data.message === "No user with this id");
       assert.equal(error.response.data.statusCode, 404);
     }
   });
@@ -59,7 +59,7 @@ suite("User API tests", () => {
       const returnedUser = await spotswapService.getUser(users[0]._id);
       assert.fail("Should not return a response");
     } catch (error) {
-      assert(error.response.data.message === "No User with this id");
+      assert(error.response.data.message === "No user with this id");
       assert.equal(error.response.data.statusCode, 404);
     }
   });

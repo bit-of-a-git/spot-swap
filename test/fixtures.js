@@ -40,6 +40,7 @@ export const galway = {
 
 export const derry = {
   title: "Best Murals in Derry",
+  county: "Derry",
 };
 
 export const testCollections = [

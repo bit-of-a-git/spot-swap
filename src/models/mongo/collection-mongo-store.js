@@ -26,8 +26,11 @@ export const collectionMongoStore = {
   },
 
   async getUserCollections(id) {
-    const collection = await Collection.find({ userId: id }).lean();
-    return collection;
+    if (Mongoose.isValidObjectId(id)) {
+      const collection = await Collection.find({ userId: id }).lean();
+      return collection;
+    }
+    return null;
   },
 
   async deleteCollectionById(id) {

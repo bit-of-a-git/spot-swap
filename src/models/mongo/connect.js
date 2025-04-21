@@ -1,12 +1,22 @@
 import * as dotenv from "dotenv";
 import Mongoose from "mongoose";
 import * as mongooseSeeder from "mais-mongoose-seeder";
+import bcrypt from "bcrypt";
+import { saltRounds } from "../../utils/config.js";
 import { seedData } from "./seed-data.js";
 
 const seedLib = mongooseSeeder.default;
 
 async function seed() {
   const seeder = seedLib(Mongoose);
+
+  await Promise.all(
+    Object.values(seedData.users).map(async (user) => {
+      if (user.password) {
+        user.password = await bcrypt.hash(user.password, saltRounds);
+      }
+    })
+  );
   const dbData = await seeder.seed(seedData, { dropDatabase: false, dropCollections: true });
   console.log(dbData);
 }
@@ -28,6 +38,6 @@ export function connectMongo() {
 
   db.once("open", function () {
     console.log(`database connected to ${this.name} on ${this.host}`);
-    // seed();
+    seed();
   });
 }

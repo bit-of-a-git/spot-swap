@@ -34,7 +34,7 @@ suite("Collection API tests", () => {
       const returnedCollection = await spotswapService.getCollection(collection.id);
       assert.fail("Should not return a response");
     } catch (error) {
-      assert(error.response.data.message === "No Collection with this id", "Incorrect Response Message");
+      assert(error.response.data.message === "No collection with this id", "Incorrect Response Message");
     }
   });
 
@@ -56,7 +56,7 @@ suite("Collection API tests", () => {
       const response = await spotswapService.deleteCollection("not an id");
       assert.fail("Should not return a response");
     } catch (error) {
-      assert(error.response.data.message === "No Collection with this id", "Incorrect Response Message");
+      assert(error.response.data.message === "No collection with this id", "Incorrect Response Message");
     }
   });
 });
