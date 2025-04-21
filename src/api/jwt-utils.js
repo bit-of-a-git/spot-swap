@@ -19,9 +19,14 @@ export function createToken(user) {
 export function decodeToken(token) {
   const userInfo = {};
   try {
+    if (token.startsWith("Bearer ")) {
+      [, token] = token.split(" ");
+    }
     const decoded = jwt.verify(token, process.env.cookie_password);
-    userInfo.userId = decoded.id;
-    userInfo.email = decoded.email;
+    return {
+      id: decoded.id,
+      email: decoded.email,
+    };
   } catch (e) {
     console.log(e.message);
   }
