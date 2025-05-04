@@ -103,4 +103,25 @@ export const spotApi = {
     description: "Delete a spot",
     validate: { params: { id: IdSpec }, failAction: validationError },
   },
+
+  deleteImage: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function (request, h) {
+      try {
+        const spot = await db.spotStore.getSpotById(request.params.id);
+        if (!spot) {
+          return Boom.notFound("No Spot with this id");
+        }
+        await db.spotStore.deleteImage(spot._id);
+        return h.response().code(204);
+      } catch (err) {
+        return Boom.serverUnavailable(err);
+      }
+    },
+    tags: ["api"],
+    description: "Delete a spot image",
+    validate: { params: { id: IdSpec }, failAction: validationError },
+  },
 };

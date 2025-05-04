@@ -1,6 +1,7 @@
 import Mongoose from "mongoose";
 import { Spot } from "./spot.js";
 import { Collection } from "./collection.js";
+import { imageStore } from "../image-store.js";
 
 export const spotMongoStore = {
   async getAllSpots() {
@@ -65,6 +66,13 @@ export const spotMongoStore = {
 
   async deleteAllSpots() {
     await Spot.deleteMany({});
+  },
+
+  async deleteImage(id) {
+    const spot = await Spot.findOne({ _id: id });
+    await imageStore.deleteImage(spot.img);
+    spot.img = null;
+    await spot.save();
   },
 
   async updateSpot(updatedSpot) {
