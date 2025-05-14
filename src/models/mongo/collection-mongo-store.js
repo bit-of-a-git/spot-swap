@@ -33,8 +33,13 @@ export const collectionMongoStore = {
 
   async getUserCollections(id) {
     if (Mongoose.isValidObjectId(id)) {
-      const collection = await Collection.find({ userId: id }).lean();
-      return collection;
+      const collections = await Collection.find({ userId: id }).lean();
+      await Promise.all(
+        collections.map(async (collection) => {
+          collection.spots = await spotMongoStore.getSpotsByCollectionId(collection._id);
+        })
+      );
+      return collections;
     }
     return null;
   },
