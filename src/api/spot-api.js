@@ -2,6 +2,7 @@ import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
 import { SpotArraySpec, SpotSpec, SpotSpecPlus, IdSpec } from "../models/joi-schemas.js";
 import { validationError } from "./logger.js";
+import { imageStore } from "../models/image-store.js";
 
 export const spotApi = {
   find: {
@@ -101,6 +102,68 @@ export const spotApi = {
     },
     tags: ["api"],
     description: "Delete a spot",
+    validate: { params: { id: IdSpec }, failAction: validationError },
+  },
+
+  uploadImage: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function (request, h) {
+      try {
+        const spot = await db.spotStore.getSpotById(request.params.id);
+        if (!spot) {
+          return Boom.notFound("No Spot with this id");
+        }
+        const file = request.payload.imagefile;
+        if (Object.keys(file).length > 0) {
+          const url = await imageStore.uploadImage(request.payload.imagefile);
+          spot.img = url;
+          await db.spotStore.updateSpot(spot);
+        }
+        return h.response(spot).code(201);
+      } catch (err) {
+        console.log(err);
+        return Boom.serverUnavailable(`Error uploading image:${err}`);
+      }
+    },
+    payload: {
+      // Add this payload configuration
+      multipart: true,
+      output: "data",
+      maxBytes: 209715200,
+      parse: true,
+    },
+    tags: ["api"],
+    description: "Create a spot image",
+    validate: { params: { id: IdSpec }, failAction: validationError },
+  },
+
+  deleteImage: {
+    auth: {
+      strategy: "jwt",
+    },
+    handler: async function (request, h) {
+      try {
+        const spot = await db.spotStore.getSpotById(request.params.id);
+        if (!spot) {
+          return Boom.notFound("No Spot with this id");
+        }
+        if (spot.img) {
+          const url = new URL(spot.img);
+          const pathSegments = url.pathname.split("/");
+          const publicId = pathSegments[pathSegments.length - 1].split(".")[0];
+          await imageStore.deleteImage(publicId);
+          delete spot.img;
+          await db.spotStore.updateSpot(spot);
+        }
+        return h.response().code(204);
+      } catch (err) {
+        return Boom.serverUnavailable(err);
+      }
+    },
+    tags: ["api"],
+    description: "Delete a spot image",
     validate: { params: { id: IdSpec }, failAction: validationError },
   },
 };

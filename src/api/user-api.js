@@ -50,6 +50,8 @@ export const userApi = {
     auth: false,
     handler: async function (request, h) {
       try {
+        const adminExists = await db.userStore.hasAdmin();
+        request.payload.role = adminExists ? "user" : "admin";
         const user = await db.userStore.addUser(request.payload);
         if (user) {
           return h.response(user).code(201);

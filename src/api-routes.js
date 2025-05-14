@@ -25,4 +25,6 @@ export const apiRoutes = [
   { method: "POST", path: "/api/collections/{id}/spots", config: spotApi.create },
   { method: "DELETE", path: "/api/spots", config: spotApi.deleteAll },
   { method: "DELETE", path: "/api/spots/{id}", config: spotApi.deleteOne },
+  { method: "DELETE", path: "/api/spots/{id}/image", config: spotApi.deleteImage },
+  { method: "POST", path: "/api/spots/{id}/image", config: spotApi.uploadImage },
 ];
