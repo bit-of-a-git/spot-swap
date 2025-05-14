@@ -5,6 +5,11 @@ import { spotMongoStore } from "./spot-mongo-store.js";
 export const collectionMongoStore = {
   async getAllCollections() {
     const collections = await Collection.find().lean();
+    await Promise.all(
+      collections.map(async (collection) => {
+        collection.spots = await spotMongoStore.getSpotsByCollectionId(collection._id);
+      })
+    );
     return collections;
   },
 
@@ -22,7 +27,8 @@ export const collectionMongoStore = {
   async addCollection(collection) {
     const newCollection = new Collection(collection);
     const collectionObj = await newCollection.save();
-    return this.getCollectionById(collectionObj._id);
+    const populatedCollection = await Collection.findById(collectionObj._id).populate("userId").lean();
+    return populatedCollection;
   },
 
   async getUserCollections(id) {
