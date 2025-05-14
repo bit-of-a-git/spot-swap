@@ -68,4 +68,9 @@ export const userMongoStore = {
       console.log(`Error updating password for user ${id}: ${error.message}`);
     }
   },
+
+  async hasAdmin() {
+    const adminCount = await User.countDocuments({ role: "admin" });
+    return adminCount > 0;
+  },
 };
