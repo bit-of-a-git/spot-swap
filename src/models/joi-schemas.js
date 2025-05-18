@@ -5,13 +5,26 @@ export const IdSpec = Joi.alternatives().try(Joi.string(), Joi.object()).descrip
 export const UserCredentialsSpec = Joi.object()
   .keys({
     email: Joi.string().email().example("homer@simpson.com").required(),
-    password: Joi.string().example("secret").required(),
+    password: Joi.string().min(8).max(64).example("secret").required(),
   })
   .label("UserCredentials");
 
 export const UserSpec = UserCredentialsSpec.keys({
-  firstName: Joi.string().example("Homer").required(),
-  lastName: Joi.string().example("Simpson").required(),
+  firstName: Joi.string()
+    .example("Homer")
+    .required()
+    .regex(/^[a-zA-Z0-9 .'_-]+$/)
+    .messages({
+      "string.pattern.base": "First name can only contain alphanumeric characters and basic punctuation",
+    })
+    .required(),
+  lastName: Joi.string()
+    .example("Simpson")
+    .required()
+    .regex(/^[a-zA-Z0-9 .'_-]+$/)
+    .messages({
+      "string.pattern.base": "Last name can only contain alphanumeric characters and basic punctuation",
+    }),
 }).label("User");
 
 export const UserSpecPlus = UserSpec.keys({
