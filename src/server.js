@@ -9,6 +9,7 @@ import dotenv from "dotenv";
 import Inert from "@hapi/inert";
 import HapiSwagger from "hapi-swagger";
 import jwt from "hapi-auth-jwt2";
+import HapiSanitizePayload from "hapi-sanitize-payload";
 import { webRoutes } from "./web-routes.js";
 import { db } from "./models/db.js";
 import { apiRoutes } from "./api-routes.js";
@@ -57,6 +58,11 @@ async function init() {
       options: swaggerOptions,
     },
   ]);
+  await server.register({
+    plugin: HapiSanitizePayload,
+    options: { pruneMethod: "delete" },
+  });
+
   server.validator(Joi);
 
   server.views({
