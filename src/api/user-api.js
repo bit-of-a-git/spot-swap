@@ -50,6 +50,12 @@ export const userApi = {
     auth: false,
     handler: async function (request, h) {
       try {
+        // Checks if the user exists by email. Returns a 409 if so
+        const userExists = await db.userStore.getUserByEmail(request.payload.email);
+        if (userExists) {
+          return Boom.conflict("A user with this email already exists.");
+        }
+        // Checks if an admin user exists. If not, the new user is created as an admin
         const adminExists = await db.userStore.hasAdmin();
         request.payload.role = adminExists ? "user" : "admin";
         const user = await db.userStore.addUser(request.payload);
