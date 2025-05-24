@@ -73,7 +73,7 @@ export const spotMongoStore = {
     spotDoc.description = updatedSpot.description;
     spotDoc.latitude = updatedSpot.latitude;
     spotDoc.longitude = updatedSpot.longitude;
-    spotDoc.img = updatedSpot.img;
+    spotDoc.images = updatedSpot.images;
     await spotDoc.save();
   },
 };
