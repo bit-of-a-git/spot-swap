@@ -71,7 +71,7 @@ export const SpotSpecPlus = SpotSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
   collectionId: IdSpec,
-  img: Joi.string().allow("").optional(),
+  images: Joi.array().items(Joi.string()).optional(),
 }).label("SpotPlus");
 
 export const SpotArraySpec = Joi.array().items(SpotSpecPlus).label("SpotArray");
