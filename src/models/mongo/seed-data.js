@@ -68,7 +68,7 @@ export const seedData = {
       longitude: -8.55774,
       collectionId: "->collections.sligo",
       category: "Nature & Outdoors",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633365/header-queen-maeve-county-sligo_xjhfou.jpg",
+      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633365/header-queen-maeve-county-sligo_xjhfou.jpg"],
     },
     spot_2: {
       name: "Quiet Man Statue",
@@ -77,7 +77,7 @@ export const seedData = {
       longitude: -9.286646,
       collectionId: "->collections.cong",
       category: "Art & Culture",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633432/IMG_7364-001_cac4dp.jpg",
+      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633432/IMG_7364-001_cac4dp.jpg"],
     },
     spot_3: {
       name: "Titanic Belfast",
@@ -86,7 +86,7 @@ export const seedData = {
       longitude: -5.909918,
       collectionId: "->collections.belfast",
       category: "Historical Sites",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1744306293/Titanic_Belfast_HDR_fwpssc_iookxo.jpg",
+      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1744306293/Titanic_Belfast_HDR_fwpssc_iookxo.jpg"],
     },
     spot_4: {
       name: "Connemara National Park",
@@ -95,7 +95,7 @@ export const seedData = {
       longitude: -9.8852,
       collectionId: "->collections.galway",
       category: "Nature & Outdoors",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1743151271/vt2dddo6attpc5kayzvk.jpg",
+      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1743151271/vt2dddo6attpc5kayzvk.jpg"],
     },
     spot_5: {
       name: "Pizza Point",
@@ -104,7 +104,7 @@ export const seedData = {
       longitude: -9.049986,
       collectionId: "->collections.galway",
       category: "Food & Drink",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1744306460/pizza-point-1200x741-1_ljxskc.jpg",
+      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1744306460/pizza-point-1200x741-1_ljxskc.jpg"],
     },
     spot_6: {
       name: "Circle of Life Commemorative Garden",
@@ -113,7 +113,7 @@ export const seedData = {
       longitude: -9.086178,
       collectionId: "->collections.galway",
       category: "Nature & Outdoors",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1744306548/CityParkCircleOfLife2-scaled_lf6eqs.jpg",
+      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1744306548/CityParkCircleOfLife2-scaled_lf6eqs.jpg"],
     },
     spot_7: {
       name: "Coughlan's",
@@ -122,7 +122,7 @@ export const seedData = {
       longitude: -8.472,
       collectionId: "->collections.cork",
       category: "Nightlife & Entertainment",
-      img: "https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633542/function-room-cork-coughlans-2_csrx9n.jpg",
+      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633542/function-room-cork-coughlans-2_csrx9n.jpg"],
     },
   },
 };

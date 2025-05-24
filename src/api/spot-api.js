@@ -118,7 +118,8 @@ export const spotApi = {
         const file = request.payload.imagefile;
         if (Object.keys(file).length > 0) {
           const url = await imageStore.uploadImage(request.payload.imagefile);
-          spot.img = url;
+          spot.images = spot.images || [];
+          spot.images.push(url);
           await db.spotStore.updateSpot(spot);
         }
         return h.response(spot).code(201);
@@ -149,14 +150,15 @@ export const spotApi = {
         if (!spot) {
           return Boom.notFound("No Spot with this id");
         }
-        if (spot.img) {
-          const url = new URL(spot.img);
-          const pathSegments = url.pathname.split("/");
-          const publicId = pathSegments[pathSegments.length - 1].split(".")[0];
-          await imageStore.deleteImage(publicId);
-          delete spot.img;
-          await db.spotStore.updateSpot(spot);
-        }
+        const { index } = request.payload;
+        const imageUrl = spot.images[index];
+        const url = new URL(imageUrl);
+        const pathSegments = url.pathname.split("/");
+        const publicId = pathSegments[pathSegments.length - 1].split(".")[0];
+        await imageStore.deleteImage(publicId);
+
+        spot.images.splice(index, 1);
+        await db.spotStore.updateSpot(spot);
         return h.response().code(204);
       } catch (err) {
         return Boom.serverUnavailable(err);
