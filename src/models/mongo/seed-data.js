@@ -68,7 +68,10 @@ export const seedData = {
       longitude: -8.55774,
       collectionId: "->collections.sligo",
       category: "Nature & Outdoors",
-      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633365/header-queen-maeve-county-sligo_xjhfou.jpg"],
+      images: [
+        "https://res.cloudinary.com/dkfxkuklv/image/upload/v1748172912/header-queen-maeve-county-sligo_vulpu1.jpg",
+        "https://res.cloudinary.com/dkfxkuklv/image/upload/v1748172912/Queen-Maeve-Trail-map-for-website-1536x864_bpuity.jpg",
+      ],
     },
     spot_2: {
       name: "Quiet Man Statue",
@@ -77,7 +80,7 @@ export const seedData = {
       longitude: -9.286646,
       collectionId: "->collections.cong",
       category: "Art & Culture",
-      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633432/IMG_7364-001_cac4dp.jpg"],
+      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1748172962/IMG_7364-001_yf1txt.jpg"],
     },
     spot_3: {
       name: "Titanic Belfast",
@@ -86,7 +89,11 @@ export const seedData = {
       longitude: -5.909918,
       collectionId: "->collections.belfast",
       category: "Historical Sites",
-      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1744306293/Titanic_Belfast_HDR_fwpssc_iookxo.jpg"],
+      images: [
+        "https://res.cloudinary.com/dkfxkuklv/image/upload/v1748172985/7920096182_6bdd9412ab_k_lj3t2y.jpg",
+        "https://res.cloudinary.com/dkfxkuklv/image/upload/v1748172984/ss-nomadic-titanic-belfast-185_6348_qs0unl.jpg",
+        "https://res.cloudinary.com/dkfxkuklv/image/upload/v1748172985/Titanic_Belfast_HDR_fwpssc_p9jxt3.jpg",
+      ],
     },
     spot_4: {
       name: "Connemara National Park",
@@ -95,7 +102,11 @@ export const seedData = {
       longitude: -9.8852,
       collectionId: "->collections.galway",
       category: "Nature & Outdoors",
-      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1743151271/vt2dddo6attpc5kayzvk.jpg"],
+      images: [
+        "https://res.cloudinary.com/dkfxkuklv/image/upload/v1748173034/Connemara12Bens_zammqi.jpg",
+        "https://res.cloudinary.com/dkfxkuklv/image/upload/v1748173033/Connemara_National_Park_Kylemore_Abbey_ygafni.jpg",
+        "https://res.cloudinary.com/dkfxkuklv/image/upload/v1748173032/Connemara_National_Park_pine_island_da63mt.jpg",
+      ],
     },
     spot_5: {
       name: "Pizza Point",
@@ -104,7 +115,7 @@ export const seedData = {
       longitude: -9.049986,
       collectionId: "->collections.galway",
       category: "Food & Drink",
-      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1744306460/pizza-point-1200x741-1_ljxskc.jpg"],
+      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1748173145/pizza-point-1200x741-1_t4p3uz.jpg"],
     },
     spot_6: {
       name: "Circle of Life Commemorative Garden",
@@ -113,7 +124,10 @@ export const seedData = {
       longitude: -9.086178,
       collectionId: "->collections.galway",
       category: "Nature & Outdoors",
-      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1744306548/CityParkCircleOfLife2-scaled_lf6eqs.jpg"],
+      images: [
+        "https://res.cloudinary.com/dkfxkuklv/image/upload/v1748173174/CityParkCircleOfLife1_pef4nc.jpg",
+        "https://res.cloudinary.com/dkfxkuklv/image/upload/v1748173175/CityParkCircleOfLife2-scaled_pgv3ba.jpg",
+      ],
     },
     spot_7: {
       name: "Coughlan's",
@@ -122,7 +136,12 @@ export const seedData = {
       longitude: -8.472,
       collectionId: "->collections.cork",
       category: "Nightlife & Entertainment",
-      images: ["https://res.cloudinary.com/dkfxkuklv/image/upload/v1742633542/function-room-cork-coughlans-2_csrx9n.jpg"],
+      images: [
+        "https://res.cloudinary.com/dkfxkuklv/image/upload/v1748173234/function-room-cork-coughlans-2_qgy1ez.jpg",
+        "https://res.cloudinary.com/dkfxkuklv/image/upload/v1748173236/party-venue-cork-coughlans-1_ap7wa5.jpg",
+        "https://res.cloudinary.com/dkfxkuklv/image/upload/v1748173237/restaurants-for-groups-venue-Cork-Couglans-Bar-venuesearch.ie-3_bbxloy.jpg",
+        "https://res.cloudinary.com/dkfxkuklv/image/upload/v1748173238/summer-bbq-venue-Cork-Couglans-Bar-venuesearch.ie-1_aka7bl.jpg",
+      ],
     },
   },
 };
