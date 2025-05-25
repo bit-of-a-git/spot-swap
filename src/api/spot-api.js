@@ -3,6 +3,7 @@ import { db } from "../models/db.js";
 import { SpotArraySpec, SpotSpec, SpotSpecPlus, IdSpec } from "../models/joi-schemas.js";
 import { validationError } from "./logger.js";
 import { imageStore } from "../models/image-store.js";
+import { fileTypeFromBuffer } from "file-type";
 
 export const spotApi = {
   find: {
@@ -116,8 +117,15 @@ export const spotApi = {
           return Boom.notFound("No Spot with this id");
         }
         const file = request.payload.imagefile;
+        // Uses the file-type library to detect the file type
+        const detectedFileType = await fileTypeFromBuffer(file);
+        const allowedMimeTypes = ["image/jpeg", "image/png"];
+        // If there is no detected file type, or if the detected file type is not in the allowed list, return an error
+        if (!detectedFileType || !allowedMimeTypes.includes(detectedFileType.mime)) {
+          return Boom.unsupportedMediaType("Invalid file type. Only supported image formats are allowed based on file content.");
+        }
         if (Object.keys(file).length > 0) {
-          const url = await imageStore.uploadImage(request.payload.imagefile);
+          const url = await imageStore.uploadImage(file);
           spot.images = spot.images || [];
           spot.images.push(url);
           await db.spotStore.updateSpot(spot);
