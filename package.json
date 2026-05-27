@@ -48,6 +48,6 @@
     "lowdb": "^7.0.1",
     "mais-mongoose-seeder": "^1.0.7",
     "mongoose": "^8.11.0",
-    "uuid": "^11.0.5"
+    "uuid": "^14.0.0"
   }
 }
